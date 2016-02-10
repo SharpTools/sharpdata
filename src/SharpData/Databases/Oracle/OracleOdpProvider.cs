@@ -67,6 +67,7 @@ namespace Sharp.Data.Databases.Oracle {
             var typeEnum = assembly.GetType(OracleDbTypeEnumName);
             ReflectionCache.DbTypeRefCursor = Enum.Parse(typeEnum, "RefCursor");
             ReflectionCache.DbTypeBlob = Enum.Parse(typeEnum, "Blob");
+            ReflectionCache.DbTypeDate = Enum.Parse(typeEnum, "Date");
         }
 
         protected virtual void ConfigForBulkSql(DbCommand command, object[] parameters) {
@@ -102,8 +103,16 @@ namespace Sharp.Data.Databases.Oracle {
             }
             if (value == null) {
                 value = "";
-            } 
-            par.DbType = GenericDbTypeMap.GetDbType(value.GetType());
+            }
+            if (parIn.DbType.HasValue) {
+                par.DbType = parIn.DbType.Value;
+            }
+            else {
+                par.DbType = GenericDbTypeMap.GetDbType(value.GetType());
+            }
+            if (par.DbType == DbType.Date) {
+                ReflectionCache.PropParameterDbType.SetValue(par, ReflectionCache.DbTypeDate, null);
+            }
             if (par.DbType == DbType.Binary) {
                 ReflectionCache.PropParameterDbType.SetValue(par, ReflectionCache.DbTypeBlob, null);                
             }

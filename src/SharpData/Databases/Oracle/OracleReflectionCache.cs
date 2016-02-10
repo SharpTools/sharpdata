@@ -8,5 +8,6 @@ namespace Sharp.Data.Databases.Oracle {
         public PropertyInfo PropArrayBindCount { get; set; }
         public object DbTypeRefCursor { get; set; }
         public object DbTypeBlob { get; set; }
+        public object DbTypeDate { get; set; }
     }
 }

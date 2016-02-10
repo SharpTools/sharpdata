@@ -7,6 +7,10 @@ namespace Sharp.Data.Log {
         private ISharpLoggerFactory _loggerFactory;
         private static LogManager _instance;
 
+        static LogManager() {
+            SetLoggersFactory(new NoLoggingLoggerFactory());
+        }
+
         public void UseLoadLog4Net() {
             SetLogAssembly(typeof(Log4NetLoggerFactory));
         }

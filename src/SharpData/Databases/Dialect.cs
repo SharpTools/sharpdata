@@ -184,6 +184,9 @@ namespace Sharp.Data {
                 if (pars[i] == null) {
                     pars[i] = new In {Name = GetParameterName(i + indexToStart), Value = values[i]};
                 }
+                else if (String.IsNullOrEmpty(pars[i].Name)) {
+                    pars[i].Name = GetParameterName(i + indexToStart);
+                }
             }
             return pars;
         }
