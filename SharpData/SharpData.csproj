@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+    <Version>2.0.0-beta</Version>
+    <Authors>Andre Carlucci</Authors>
+    <Company>Andre Carlucci</Company>
+    <Description>An awesome ORM for querying and modifying databases.</Description>
+    <PackageProjectUrl>https://github.com/SharpTools/sharpdata</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/SharpTools/sharpdata/master/LICENSE</PackageLicenseUrl>
+    <PackageTags>orm, netstandard, migrations</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+  </ItemGroup>
+
+</Project>
