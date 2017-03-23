@@ -20,24 +20,24 @@ namespace Sharp.Data.Log {
         private void CacheMethods() {
             Type loggerType = _logger.GetType();
 
-            ErrorMethod = loggerType.GetTypeInfo().GetMethod("Error", new[] {typeof (string)});
-            FatalMethod = loggerType.GetTypeInfo().GetMethod("Fatal", new[] {typeof (string)});
-            DebugMethod = loggerType.GetTypeInfo().GetMethod("Debug", new[] {typeof (string)});
-            InfoMethod = loggerType.GetTypeInfo().GetMethod("Info", new[] {typeof (string)});
-            WarnMethod = loggerType.GetTypeInfo().GetMethod("Warn", new[] {typeof (string)});
+            ErrorMethod = loggerType.GetMethod("Error", new[] {typeof (string)});
+            FatalMethod = loggerType.GetMethod("Fatal", new[] {typeof (string)});
+            DebugMethod = loggerType.GetMethod("Debug", new[] {typeof (string)});
+            InfoMethod = loggerType.GetMethod("Info", new[] {typeof (string)});
+            WarnMethod = loggerType.GetMethod("Warn", new[] {typeof (string)});
 
-            ErrorExceptionMethod = loggerType.GetTypeInfo().GetMethod("DebugException", new[] { typeof(string), typeof(Exception) });
-            FatalExceptionMethod = loggerType.GetTypeInfo().GetMethod("FatalException", new[] { typeof(string), typeof(Exception) });
-            DebugExceptionMethod = loggerType.GetTypeInfo().GetMethod("DebugException", new[] { typeof(string), typeof(Exception) });
-            InfoExceptionMethod = loggerType.GetTypeInfo().GetMethod("InfoException", new[] { typeof(string), typeof(Exception) });
-            WarnExceptionMethod = loggerType.GetTypeInfo().GetMethod("WarnException", new[] { typeof(string), typeof(Exception) });
+            ErrorExceptionMethod = loggerType.GetMethod("DebugException", new[] { typeof(string), typeof(Exception) });
+            FatalExceptionMethod = loggerType.GetMethod("FatalException", new[] { typeof(string), typeof(Exception) });
+            DebugExceptionMethod = loggerType.GetMethod("DebugException", new[] { typeof(string), typeof(Exception) });
+            InfoExceptionMethod = loggerType.GetMethod("InfoException", new[] { typeof(string), typeof(Exception) });
+            WarnExceptionMethod = loggerType.GetMethod("WarnException", new[] { typeof(string), typeof(Exception) });
 
 
-            IsErrorMethod = loggerType.GetTypeInfo().GetProperty("IsErrorEnabled", typeof(bool));
-            IsFatalMethod = loggerType.GetTypeInfo().GetProperty("IsFatalEnabled", typeof(bool));
-            IsDebugMethod = loggerType.GetTypeInfo().GetProperty("IsDebugEnabled", typeof(bool));
-            IsInfoMethod = loggerType.GetTypeInfo().GetProperty("IsInfoEnabled", typeof(bool));
-            IsWarnMethod = loggerType.GetTypeInfo().GetProperty("IsWarnEnabled", typeof(bool));
+            IsErrorMethod = loggerType.GetProperty("IsErrorEnabled", typeof(bool));
+            IsFatalMethod = loggerType.GetProperty("IsFatalEnabled", typeof(bool));
+            IsDebugMethod = loggerType.GetProperty("IsDebugEnabled", typeof(bool));
+            IsInfoMethod = loggerType.GetProperty("IsInfoEnabled", typeof(bool));
+            IsWarnMethod = loggerType.GetProperty("IsWarnEnabled", typeof(bool));
         }
 
         public bool IsErrorEnabled {

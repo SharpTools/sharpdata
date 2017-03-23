@@ -59,7 +59,7 @@ namespace Sharp.Data.Databases.Oracle {
 
         protected virtual void CacheParameterProperties(DbCommand command) {
             var parameter = command.CreateParameter();
-            ReflectionCache.PropParameterDbType = parameter.GetType().GetTypeInfo().GetProperty("OracleDbType", ReflectionHelper.NoRestrictions);
+            ReflectionCache.PropParameterDbType = parameter.GetType().GetProperty("OracleDbType", ReflectionHelper.NoRestrictions);
         }
 
         protected virtual void CacheOracleDbTypeEnumValues(DbCommand command) {

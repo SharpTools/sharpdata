@@ -11,7 +11,7 @@ namespace Sharp.Data {
             Type type = typeof(T);
             var columns = res.GetColumnNames();
             var columnProps =
-                columns.Select(x => type.GetTypeInfo().GetProperty(x, ReflectionHelper.NoRestrictions | BindingFlags.IgnoreCase))
+                columns.Select(x => type.GetProperty(x, ReflectionHelper.NoRestrictions | BindingFlags.IgnoreCase))
                     .ToList();
             foreach (var row in res) {
                 var obj = new T();

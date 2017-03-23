@@ -18,7 +18,7 @@ namespace Sharp.Data.Providers {
         }
 
         public override DatabaseException CreateSpecificException(System.Exception exception, string sql) {
-            var numberProp = exception.GetType().GetTypeInfo().GetProperty("Number", ReflectionHelper.NoRestrictions);
+            var numberProp = exception.GetType().GetProperty("Number", ReflectionHelper.NoRestrictions);
             if(numberProp == null) {
                 return base.CreateSpecificException(exception, sql);
             }

@@ -69,7 +69,7 @@ namespace Sharp.Data.Log {
             var loggerParam = Expression.Parameter(typeof(object), "l");
             var messageParam = Expression.Parameter(typeof(object), "o");
             var convertedParam = Expression.Convert(loggerParam, ILogType);
-            var methodCall = Expression.Call(convertedParam, ILogType.GetTypeInfo().GetMethod(methodName, new[] { typeof(object) }), messageParam);
+            var methodCall = Expression.Call(convertedParam, ILogType.GetMethod(methodName, new[] { typeof(object) }), messageParam);
             return (Action<object, object>)Expression.Lambda(methodCall, new[] { loggerParam, messageParam }).Compile();
         }
 
@@ -78,7 +78,7 @@ namespace Sharp.Data.Log {
             var messageParam = Expression.Parameter(typeof(object), "o");
             var exceptionParam = Expression.Parameter(typeof(Exception), "e");
             var convertedParam = Expression.Convert(loggerParam, ILogType);
-            var methodCall = Expression.Call(convertedParam, ILogType.GetTypeInfo().GetMethod(methodName, new[] { typeof(object), typeof(Exception) }), messageParam, exceptionParam);
+            var methodCall = Expression.Call(convertedParam, ILogType.GetMethod(methodName, new[] { typeof(object), typeof(Exception) }), messageParam, exceptionParam);
             return (Action<object, object, Exception>)Expression.Lambda(methodCall, new[] { loggerParam, messageParam, exceptionParam }).Compile();
         }
 
@@ -87,7 +87,7 @@ namespace Sharp.Data.Log {
             var formatParam = Expression.Parameter(typeof(string), "f");
             var parametersParam = Expression.Parameter(typeof(object[]), "p");
             var convertedParam = Expression.Convert(loggerParam, ILogType);
-            var methodCall = Expression.Call(convertedParam, ILogType.GetTypeInfo().GetMethod(methodName, new[] { typeof(string), typeof(object[]) }), formatParam, parametersParam);
+            var methodCall = Expression.Call(convertedParam, ILogType.GetMethod(methodName, new[] { typeof(string), typeof(object[]) }), formatParam, parametersParam);
             return (Action<object, string, object[]>)Expression.Lambda(methodCall, new[] { loggerParam, formatParam, parametersParam }).Compile();
         }
 

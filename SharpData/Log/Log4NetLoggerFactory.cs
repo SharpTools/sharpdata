@@ -20,7 +20,7 @@ namespace Sharp.Data.Log {
         }
 
         private static Func<TParameter, object> GetGetLoggerMethodCall<TParameter>() {
-            var method = LogManagerType.GetTypeInfo().GetMethod("GetLogger", new[] { typeof(TParameter) });
+            var method = LogManagerType.GetMethod("GetLogger", new[] { typeof(TParameter) });
             ParameterExpression resultValue;
             ParameterExpression keyParam = Expression.Parameter(typeof(TParameter), "key");
             MethodCallExpression methodCall = Expression.Call(null, method, new Expression[] { resultValue = keyParam });
