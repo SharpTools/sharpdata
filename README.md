@@ -3,7 +3,12 @@ An awesome ORM for querying and modifying databases
 
 Nuget package: **install-package sharpdata**
 
-Supports: SqlServer, Oracle, Postgre, Mysql and SqLite.
+Supports: 
+- SqlServer
+- Oracle
+- Postgre
+- Mysql
+- SqLite.
 
 # Usage
 
