@@ -12,7 +12,7 @@ Supports:
 
 # Usage
 
-```
+```cs
 using (var client = SharpFactory.Default.CreateDataClient(SqlClientFactory.Instance, "Data Source=(localdb)\\MSSQLLocalDB; Integrated Security=True;")) {
     if (client.TableExists("users")) {
         client.RemoveTable("users");
