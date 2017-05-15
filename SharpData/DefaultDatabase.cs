@@ -12,8 +12,8 @@ namespace Sharp.Data {
         public string ConnectionString { get; protected set; }
         public int Timeout { get; set; }
         
-        protected DbConnection Connection;
-        protected DbTransaction Transaction;
+        protected IDbConnection Connection;
+        protected IDbTransaction Transaction;
 
         public DefaultDatabase(IDataProvider provider, string connectionString) {
             Provider = provider;
@@ -25,46 +25,43 @@ namespace Sharp.Data {
             Log.Debug("Provider: " + providerName);
         }
 
-        protected void RetrieveOutParameters(object[] parameters, DbCommand cmd) {
+        protected void RetrieveOutParameters(object[] parameters, IDbCommand cmd) {
             if (parameters == null) {
                 return;
             }
             foreach (object parameter in parameters) {
-                Out pout = parameter as Out;
+                var pout = parameter as Out;
                 if (pout != null) {
                     pout.Value = ((DbParameter) cmd.Parameters[pout.Name]).Value;
                     continue;
                 }
-                InOut pinout = parameter as InOut;
-                if (pinout != null) {
-                    pinout.Value = ((DbParameter) cmd.Parameters[pinout.Name]).Value;
-                    continue;
+                if (parameter is InOut pinout) {
+                    pinout.Value = ((DbParameter)cmd.Parameters[pinout.Name]).Value;
                 }
             }
         }
 
-        protected DbDataReader TryCreateReader(string call, object[] parameters, CommandType commandType) {
-            DbCommand cmd = CreateCommand(call, parameters);
+        protected IDataReader TryCreateReader(string call, object[] parameters, CommandType commandType) {
+            var cmd = CreateCommand(call, parameters);
             cmd.CommandType = commandType;
             return cmd.ExecuteReader();
         }
 
-
         protected object TryQueryReader(string call, object[] parameters) {
-            DbCommand cmd = CreateCommand(call, parameters);
-            object obj = cmd.ExecuteScalar();
+            var cmd = CreateCommand(call, parameters);
+            var obj = cmd.ExecuteScalar();
             return obj;
         }
 
         protected void TryExecuteStoredProcedure(string call, object[] parameters, bool isBulk = false) {
-            DbCommand cmd = CreateCommand(call, parameters, isBulk);
+            var cmd = CreateCommand(call, parameters, isBulk);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.ExecuteNonQuery();
             RetrieveOutParameters(parameters, cmd);
         }
 
         protected object TryCallStoredFunction(DbType returnType, string call, object[] parameters) {
-            DbParameter returnPar = GetReturnParameter(returnType);
+            var returnPar = GetReturnParameter(returnType);
 
             var cmd = CreateCommand(call, parameters);
             cmd.Parameters.Insert(0, returnPar);
@@ -75,21 +72,21 @@ namespace Sharp.Data {
             return returnObject;
         }
         
-        protected void SetTimeoutForCommand(DbCommand cmd) {
+        protected void SetTimeoutForCommand(IDbCommand cmd) {
             //Doesn't work for oracle!
             if (Timeout >= 0) {
                 cmd.CommandTimeout = Timeout;
             }
         }
 
-        protected DbCommand CreateIDbCommand(string call, object[] parameters) {
+        protected IDbCommand CreateIDbCommand(string call, object[] parameters) {
             var cmd = Connection.CreateCommand();
             cmd.CommandText = call;
             cmd.Transaction = Transaction;
             return cmd;
         }
 
-        protected static void LogCommandCall(string call, DbCommand cmd) {
+        protected static void LogCommandCall(string call, IDbCommand cmd) {
             if (Log.IsDebugEnabled) {
                 var sb = new StringBuilder();
                 sb.Append("Call: ").AppendLine(call);
@@ -104,11 +101,11 @@ namespace Sharp.Data {
             }
         }
 
-        protected void PopulateCommandParameters(DbCommand cmd, object[] parameters, bool isBulk) {
+        protected void PopulateCommandParameters(IDbCommand cmd, object[] parameters, bool isBulk) {
             if (parameters == null) {
                 return;
             }
-            foreach (object parameter in parameters) {
+            foreach (var parameter in parameters) {
                 DbParameter par;
                 if (parameter is Out) {
                     par = GetOutParameter((Out) parameter);
@@ -129,7 +126,7 @@ namespace Sharp.Data {
             }
         }
 
-        protected DbParameter GetInParameter(In p, DbCommand cmd, bool isBulk) {
+        protected DbParameter GetInParameter(In p, IDbCommand cmd, bool isBulk) {
             var par = Provider.GetParameter(p, isBulk);
             par.Direction = ParameterDirection.Input;
             par.Value = p.Value ?? DBNull.Value;
@@ -139,12 +136,9 @@ namespace Sharp.Data {
 
         protected DbParameter GetOutParameter(Out outParameter) {
             DbParameter par;
-            if (outParameter.IsCursor) {
-                par = Provider.GetParameterCursor();
-            }
-            else {
-                par = Provider.GetParameter();
-            }
+            par = outParameter.IsCursor ? 
+                Provider.GetParameterCursor() : 
+                Provider.GetParameter();
             //this "if != null" is for the cursor parameter, ignored by sql server
             if (par != null) {
                 par.Direction = ParameterDirection.Output;
@@ -216,15 +210,15 @@ namespace Sharp.Data {
         }
 
         protected int TryExecuteSql(string call, object[] parameters, bool isBulk = false) {
-            DbCommand cmd = CreateCommand(call, parameters, isBulk);
-            int modifiedRows = cmd.ExecuteNonQuery();
+            var cmd = CreateCommand(call, parameters, isBulk);
+            var modifiedRows = cmd.ExecuteNonQuery();
             RetrieveOutParameters(parameters, cmd);
             return modifiedRows;
         }
 
-        protected DbCommand CreateCommand(string call, object[] parameters, bool isBulk = false) {
+        protected IDbCommand CreateCommand(string call, object[] parameters, bool isBulk = false) {
             OpenConnection();
-            DbCommand cmd = CreateIDbCommand(call, parameters);
+            var cmd = CreateIDbCommand(call, parameters);
             Provider.ConfigCommand(cmd, parameters, isBulk);
             SetTimeoutForCommand(cmd);
             PopulateCommandParameters(cmd, parameters, isBulk);
@@ -244,8 +238,8 @@ namespace Sharp.Data {
             Log.Debug("Connection open");
         }
 
-        protected ResultSet ExecuteCatchingErrors(Func<DbDataReader> getReader, string call) {
-            DbDataReader reader = null;
+        protected ResultSet ExecuteCatchingErrors(Func<IDataReader> getReader, string call) {
+            IDataReader reader = null;
             try {
                 BeforeActionVerifyIfExistisACommandToBeExecuted();
                 reader = getReader();
@@ -256,9 +250,7 @@ namespace Sharp.Data {
                 throw Provider.CreateSpecificException(ex, call);
             }
             finally {
-                if (reader != null) {
-                    reader.Dispose();
-                }
+                reader?.Dispose();
             }
         }
 

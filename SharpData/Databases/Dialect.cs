@@ -11,25 +11,15 @@ using Sharp.Util;
 
 namespace Sharp.Data {
     public abstract class Dialect {
-        public virtual string WordNull {
-            get { return "NULL"; }
-        }
+        public virtual string WordNull => "NULL";
 
-		public virtual string WordNotNull {
-            get { return "NOT NULL"; }
-        }
+        public virtual string WordNotNull => "NOT NULL";
 
-		public virtual string WordWhere {
-            get { return "WHERE"; }
-        }
+        public virtual string WordWhere => "WHERE";
 
-        public virtual string ScriptSeparator {
-            get { return ";"; }
-        }
+        public virtual string ScriptSeparator => ";";
 
-        public virtual string ScriptCommentsPrefix {
-            get { return "--"; }
-        }
+        public virtual string ScriptCommentsPrefix => "--";
 
         public abstract string ParameterPrefix { get; }
 

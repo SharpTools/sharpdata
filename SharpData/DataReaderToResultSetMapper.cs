@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
+using System.Data;
 
 namespace Sharp.Data {
 	public class DataReaderToResultSetMapper {
 
-		public static ResultSet Map(DbDataReader dr) {
-			int numberOfColumns = dr.FieldCount;
-			string[] colNames = GetColumnNames(dr, numberOfColumns);
+		public static ResultSet Map(IDataReader dr) {
+			var numberOfColumns = dr.FieldCount;
+			var colNames = GetColumnNames(dr, numberOfColumns);
 			var table = new ResultSet(colNames);
 			while (dr.Read()) {
 				MapRow(dr, numberOfColumns, table);
@@ -15,17 +15,17 @@ namespace Sharp.Data {
 			return table;
 		}
 
-		private static void MapRow(DbDataReader dr, int numberOfColumns, ResultSet table) {
+		private static void MapRow(IDataReader dr, int numberOfColumns, ResultSet table) {
 			var row = new object[numberOfColumns];
-			for (int i = 0; i < numberOfColumns; i++) {
+			for (var i = 0; i < numberOfColumns; i++) {
 				row[i] = (DBNull.Value.Equals(dr[i])) ? null : dr[i];
 			}
 			table.AddRow(row);
 		}
 
-		private static string[] GetColumnNames(DbDataReader dr, int numberOfColumns) {
+		private static string[] GetColumnNames(IDataReader dr, int numberOfColumns) {
 			var colNames = new List<string>();
-			for (int i = 0; i < numberOfColumns; i++) {
+			for (var i = 0; i < numberOfColumns; i++) {
 				colNames.Add(dr.GetName(i));
 			}
 			return colNames.ToArray();

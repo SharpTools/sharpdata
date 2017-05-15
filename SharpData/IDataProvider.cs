@@ -7,8 +7,8 @@ namespace Sharp.Data {
     public interface IDataProvider {
         string Name { get; }
         DatabaseKind DatabaseKind { get; }
-        DbConnection GetConnection();
-        void ConfigCommand(DbCommand command, object[] parameters, bool isBulk);
+        IDbConnection GetConnection();
+        void ConfigCommand(IDbCommand command, object[] parameters, bool isBulk);
         DbParameter GetParameter();
         DbParameter GetParameter(In parameter, bool isBulk);
         DbParameter GetParameterCursor();

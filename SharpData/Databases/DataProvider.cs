@@ -4,7 +4,7 @@ using System.Data.Common;
 
 namespace Sharp.Data.Databases {
     public abstract class DataProvider : IDataProvider {
-        protected DbProviderFactory DbProviderFactory { get; private set; }
+        protected DbProviderFactory DbProviderFactory { get; }
         public abstract string Name { get; }
         public abstract DatabaseKind DatabaseKind { get; }
 
@@ -12,11 +12,11 @@ namespace Sharp.Data.Databases {
             DbProviderFactory = dbProviderFactory;
         }
 
-        public virtual DbConnection GetConnection() {
+        public virtual IDbConnection GetConnection() {
             return DbProviderFactory.CreateConnection();
         }
 
-        public virtual void ConfigCommand(DbCommand command, object[] parameters, bool isBulk) { }
+        public virtual void ConfigCommand(IDbCommand command, object[] parameters, bool isBulk) { }
 
         public DbParameter GetParameter() {
             return DbProviderFactory.CreateParameter();

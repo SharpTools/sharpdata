@@ -1,5 +1,6 @@
 ﻿using Sharp.Data;
 using Sharp.Data.Filters;
+using Sharp.Data.Schema;
 using System;
 using static Sharp.Data.Schema.Column;
 
@@ -21,13 +22,16 @@ namespace SharpData.Sample {
             client.Insert
                   .Into("users")
                   .Columns("username", "password")
-                  .Values("foo", "bar");
+                  .Values("foo", "bar")
+                  .Values("foo2", "bar")
+                  .Values("foo3", "bar");
 
             var users = client.Select
                               .AllColumns()
                               .From("users")
                               .Where(Filter.Eq("username", "foo"))
-                              .SkipTake(0, 1)
+                              .OrderBy(OrderBy.Ascending("username"))
+                              .SkipTake(0, 2)
                               .Map<User>();
 
             foreach (var user in users) {

@@ -11,22 +11,20 @@ namespace Sharp.Data.Databases.SqLite {
 
     public class SqLiteDialect : Dialect {
 
-		public override string ParameterPrefix {
-            get { return "@"; }
-        }
+		public override string ParameterPrefix => "@";
 
         public override DbType GetDbType(string sqlType, int dataPrecision) {
             throw new NotImplementedException();
         }
 
         public override string[] GetCreateTableSqls(Table table) {
-            List<string> primaryKeyColumns = new List<string>();
+            var primaryKeyColumns = new List<string>();
 
             //create table
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             sb.Append("create table ").Append(table.Name).AppendLine(" ( ");
 
-            int size = table.Columns.Count;
+            var size = table.Columns.Count;
 
             for (int i = 0; i < size; i++) {
                 Column col = table.Columns[i];
@@ -49,24 +47,24 @@ namespace Sharp.Data.Databases.SqLite {
         }
 
         public override string GetColumnToSqlWhenCreate(Column col) {
-        	string colAutoIncrement = "";
+        	var colAutoIncrement = "";
 			if(col.IsAutoIncrement) {
 				colAutoIncrement = "autoincrement";
 				col.IsPrimaryKey = true;
 			}
-            string colType = GetDbTypeString(col.Type, col.Size);
-            string colNullable = col.IsNullable ? WordNull : WordNotNull;
-			string colPrimaryKey = col.IsPrimaryKey ? "primary key" : "";
+            var colType = GetDbTypeString(col.Type, col.Size);
+            var colNullable = col.IsNullable ? WordNull : WordNotNull;
+            var colPrimaryKey = col.IsPrimaryKey ? "primary key" : "";
 
-            string colDefault = (col.DefaultValue != null) ?
+            var colDefault = (col.DefaultValue != null) ?
                                         String.Format("default ({0})", GetColumnValueToSql(col.DefaultValue)) : "";
 
-			return String.Format("{0} {1} {2} {3} {4} {5}", col.ColumnName, colType, colNullable, colDefault, colPrimaryKey, colAutoIncrement);
+			return $"{col.ColumnName} {colType} {colNullable} {colDefault} {colPrimaryKey} {colAutoIncrement}";
         }
 
         public override string[] GetDropTableSqls(string tableName) {
-            string sql = String.Format("drop table {0}", tableName);
-            return new string[1] {sql};
+            var sql = String.Format("drop table {0}", tableName);
+            return new[] {sql};
         }
         
 

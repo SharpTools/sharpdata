@@ -33,7 +33,7 @@ namespace Sharp.Data.Databases.Oracle {
         public OracleOdpProvider(DbProviderFactory dbProviderFactory) : base(dbProviderFactory) {
         }
 
-        public override void ConfigCommand(DbCommand command, object[] parameters, bool isBulk) {
+        public override void ConfigCommand(IDbCommand command, object[] parameters, bool isBulk) {
             EnsureProperties(command);
             if (parameters == null || !parameters.Any()) return;
             ReflectionCache.PropBindByName.SetValue(command, true, null);
@@ -43,7 +43,7 @@ namespace Sharp.Data.Databases.Oracle {
             ConfigForBulkSql(command, parameters);
         }
 
-        protected virtual void EnsureProperties(DbCommand command) {
+        protected virtual void EnsureProperties(IDbCommand command) {
             if (ReflectionCache.IsCached) return;
             CacheCommandProperties(command);
             CacheParameterProperties(command);
@@ -51,18 +51,18 @@ namespace Sharp.Data.Databases.Oracle {
             ReflectionCache.IsCached = true;
         }
 
-        protected virtual void CacheCommandProperties(DbCommand command) {
+        protected virtual void CacheCommandProperties(IDbCommand command) {
             var oracleDbCommandType = command.GetType().GetTypeInfo();
             ReflectionCache.PropBindByName = oracleDbCommandType.GetDeclaredProperty("BindByName");
             ReflectionCache.PropArrayBindCount = oracleDbCommandType.GetDeclaredProperty("ArrayBindCount");
         }
 
-        protected virtual void CacheParameterProperties(DbCommand command) {
+        protected virtual void CacheParameterProperties(IDbCommand command) {
             var parameter = command.CreateParameter();
             ReflectionCache.PropParameterDbType = parameter.GetType().GetProperty("OracleDbType", ReflectionHelper.NoRestrictions);
         }
 
-        protected virtual void CacheOracleDbTypeEnumValues(DbCommand command) {
+        protected virtual void CacheOracleDbTypeEnumValues(IDbCommand command) {
             var assembly = command.GetType().GetTypeInfo().Assembly;
             var typeEnum = assembly.GetType(OracleDbTypeEnumName);
             ReflectionCache.DbTypeRefCursor = Enum.Parse(typeEnum, "RefCursor");
@@ -70,7 +70,7 @@ namespace Sharp.Data.Databases.Oracle {
             ReflectionCache.DbTypeDate = Enum.Parse(typeEnum, "Date");
         }
 
-        protected virtual void ConfigForBulkSql(DbCommand command, object[] parameters) {
+        protected virtual void ConfigForBulkSql(IDbCommand command, object[] parameters) {
             var param = parameters[0];
             if (param is In) {
                 param = ((In)param).Value;

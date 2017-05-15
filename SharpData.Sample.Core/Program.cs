@@ -10,6 +10,8 @@ namespace SharpData.Sample.Core {
             using (var client = SharpFactory.Default.CreateDataClient(factory, "Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=sharp; Integrated Security=True; Encrypt=False; TrustServerCertificate=True; ApplicationIntent=ReadWrite;")) {
                 new Example().Start(client);
             }
+            Console.WriteLine("Done");
+            Console.ReadLine();
         }
     }
 }
