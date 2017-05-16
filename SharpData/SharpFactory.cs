@@ -40,37 +40,21 @@ namespace Sharp.Data {
             ConnectionString = connectionString;
             DbProviderFactory = dbProviderFactory;
         }
-
-        public IDataProvider CreateDataProvider(DbProviderFactory dbProviderFactory) {
-            return GetConfig(dbProviderFactory).CreateDataProvider();
-        }
-
+        
         public IDataProvider CreateDataProvider() {
-            return CreateDataProvider(DbProviderFactory);
-        }
-
-        public IDatabase CreateDatabase(DbProviderFactory dbProviderFactory, string connectionString) {
-            return GetConfig(dbProviderFactory, connectionString).CreateDatabase();
+            return GetConfig(DbProviderFactory).CreateDataProvider();
         }
 
         public IDatabase CreateDatabase() {
-            return CreateDatabase(DbProviderFactory, ConnectionString);
-        }
-
-        public IDataClient CreateDataClient(DbProviderFactory dbProviderFactory, string connectionString) {
-            return GetConfig(dbProviderFactory, connectionString).CreateDataClient();
+            return GetConfig(DbProviderFactory, ConnectionString).CreateDatabase();
         }
 
         public IDataClient CreateDataClient() {
-            return CreateDataClient(DbProviderFactory, ConnectionString);
-        }
-
-        public Dialect CreateDialect(DbProviderFactory dbProviderFactory) {
-            return GetConfig(dbProviderFactory).CreateDialect();
+            return GetConfig(DbProviderFactory, ConnectionString).CreateDataClient();
         }
 
         public Dialect CreateDialect() {
-            return CreateDialect(DbProviderFactory);
+            return GetConfig(DbProviderFactory).CreateDialect();
         }
 
         private DbFactory GetConfig(DbProviderFactory dbProviderFactory) {

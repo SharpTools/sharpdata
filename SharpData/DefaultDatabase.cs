@@ -5,7 +5,7 @@ using Sharp.Data.Log;
 using System.Data.Common;
 
 namespace Sharp.Data {
-    public class DefaultDatabase {
+    public abstract class DefaultDatabase {
         private static readonly ISharpLogger Log = LogManager.GetLogger("Sharp.Data.Database");
 
         public IDataProvider Provider { get; protected set; }

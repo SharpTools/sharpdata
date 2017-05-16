@@ -51,7 +51,7 @@ namespace Sharp.Tests.Databases.Data {
             DataClient.Insert.Into("footable").Columns("colInt", "colString").Values(1, "asdf");
 
             var res = DataClient.Select.Columns("colInt", "colString").From("footable").AllRows();
-            Assert.Equal(1L, res[0][0]);
+            Assert.True(1 == Convert.ToInt32(res[0][0]));
             Assert.Equal("asdf", res[0][1]);
         }
 
@@ -93,7 +93,7 @@ namespace Sharp.Tests.Databases.Data {
                                  .From(TableFoo)
                                  .AllRows();
             Assert.Equal(3, res.Count);
-            Assert.Equal(1L, res[0][0]);
+            Assert.True(1 == Convert.ToInt32(res[0][0]));
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace Sharp.Tests.Databases.Data {
                 ).AllRows();
 
             Assert.Equal(1, res.Count);
-            Assert.Equal(1L, res[0][0]);
+            Assert.True(1 == Convert.ToInt32(res[0][0]));
         }
 
         [Fact]
@@ -123,7 +123,7 @@ namespace Sharp.Tests.Databases.Data {
                                        .SkipTake(1, 1);
 
             Assert.Equal(1, res.Count);
-            Assert.Equal(2L, res[0][0]);
+            Assert.True(2 == Convert.ToInt32(res[0][0]));
         }
 
         [Fact]
@@ -161,8 +161,8 @@ namespace Sharp.Tests.Databases.Data {
                 .AllRows();
 
             Assert.Equal(2, res.Count);
-            Assert.Equal(1L, res[0][0]);
-            Assert.Equal(2L, res[1][0]);
+            Assert.True(1 == Convert.ToInt32(res[0][0]));
+            Assert.True(2 == Convert.ToInt32(res[1][0]));
         }
 
         private static Filter CreateComplexFilter() {
@@ -317,9 +317,7 @@ namespace Sharp.Tests.Databases.Data {
         public void Can_count() {
             CreateTableFoo();
             PopulateTableFoo();
-
-            int num = DataClient.Count.Table(TableFoo).AllRows();
-
+            var num = DataClient.Count.Table(TableFoo).AllRows();
             Assert.Equal(3, num);
         }
 

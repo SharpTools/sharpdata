@@ -37,10 +37,11 @@ namespace Sharp.Tests.Databases.Data {
         }
 
         protected void PopulateTableFoo() {
-            DataClient.Insert.Into(TableFoo).Columns("id", "name")
-                .Values(1, "v1")
-                .Values(2, "v2")
-                .Values(Int32.MaxValue, "v3");
+            DataClient.Insert.Into(TableFoo)
+                             .Columns("id", "name")
+                             .Values(1, "v1")
+                             .Values(2, "v2")
+                             .Values(3, "v3");
         }
 
         protected void CreateTableBar() {
