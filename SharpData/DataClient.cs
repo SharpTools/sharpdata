@@ -211,7 +211,14 @@ namespace Sharp.Data {
 
         public bool TableExists(string table) {
             var sql = Dialect.GetTableExistsSql(table);
-            return Convert.ToInt32(Database.QueryScalar(sql)) > 0;
+            var res = Database.Query(sql);
+            if (!res.Any()) {
+                return false;
+            }
+            if (res[0][0] is int) {
+                return Convert.ToInt32(res[0][0]) > 0;
+            }
+            return true;
         }
 
         public void Commit() {

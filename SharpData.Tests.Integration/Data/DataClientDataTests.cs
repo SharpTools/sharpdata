@@ -29,16 +29,12 @@ namespace Sharp.Tests.Databases.Data {
                                  Column.AutoIncrement("id"),
                                  Column.Date("colDate"),
                                  Column.Boolean("colBool"));
-
-
-            DateTime now = DateTime.Now;
+            var now = new DateTime(2017,1,1);
 
             DataClient.Insert.Into("footable").Columns("colDate", "colBool").Values(now, true);
-
-            ResultSet res = DataClient.Select.Columns("colDate", "colBool").From("footable").AllRows();
+            var res = DataClient.Select.Columns("colDate", "colBool").From("footable").AllRows();
 
             Assert.Equal(now.ToString(), res[0][0].ToString());
-
             Assert.Equal(true, res[0][1]);
         }
 

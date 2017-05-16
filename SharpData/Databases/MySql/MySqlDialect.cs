@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using Sharp.Data.Schema;
 using Sharp.Util;
@@ -9,9 +10,7 @@ using Sharp.Util;
 namespace Sharp.Data.Databases.MySql {
     public class MySqlDialect : Dialect {
         
-        public override string ParameterPrefix {
-            get { return ":"; }
-        }
+        public override string ParameterPrefix => "@";
 
         public override DbType GetDbType(string sqlType, int dataPrecision) {
             throw new NotImplementedException();
@@ -21,14 +20,11 @@ namespace Sharp.Data.Databases.MySql {
 			var sqls = new List<string>();
 			var primaryKeyColumns = new List<string>();
 
-			//create table myTable (id int not null auto_increment, name VARCHAR(255) not null, primary key(id))
-
-			//create table
 			var sb = new StringBuilder();
 			sb.Append("create table ").Append(table.Name).AppendLine(" ( ");
 
-			int size = table.Columns.Count;
-			for (int i = 0; i < size; i++) {
+			var size = table.Columns.Count;
+			for (var i = 0; i < size; i++) {
 				sb.Append(GetColumnToSqlWhenCreate(table.Columns[i]));
 				if (i != size - 1) {
 					sb.AppendLine(",");
@@ -37,6 +33,10 @@ namespace Sharp.Data.Databases.MySql {
 					primaryKeyColumns.Add(table.Columns[i].ColumnName);
 				}
 			}
+
+            if (sb.ToString().Contains("AUTO_INCREMENT PRIMARY KEY") && primaryKeyColumns.Any()) {
+                sb.Replace("PRIMARY KEY", "");
+            }
 
 			//primary keys
 			if (primaryKeyColumns.Count > 0) {
@@ -99,11 +99,10 @@ namespace Sharp.Data.Databases.MySql {
         }
 
         public override string GetColumnToSqlWhenCreate(Column col) {
-            string nullOption = col.IsNullable ? WordNull : WordNotNull;
-            string autoIncrement = col.IsAutoIncrement ? " AUTO_INCREMENT" : "";
-            string defaultValue = col.DefaultValue != null ? " default "+GetColumnValueToSql(col.DefaultValue): "";
-
-            return String.Format("{0} {1} {2}{3}{4}", col.ColumnName, GetDbTypeString(col.Type, col.Size), nullOption, defaultValue, autoIncrement);
+            var nullOption = col.IsNullable ? WordNull : WordNotNull;
+            var autoIncrement = col.IsAutoIncrement ? " AUTO_INCREMENT PRIMARY KEY" : "";
+            var defaultValue = col.DefaultValue != null ? " default "+GetColumnValueToSql(col.DefaultValue): "";
+            return $"{col.ColumnName} {GetDbTypeString(col.Type, col.Size)} {nullOption}{defaultValue}{autoIncrement}";
         }
 
         public override string GetColumnValueToSql(object value) {
@@ -123,8 +122,8 @@ namespace Sharp.Data.Databases.MySql {
         }
 
     	public override string GetTableExistsSql(string tableName) {
-    		return "select count(TABLE_NAME) from INFORMATION_SCHEMA where TABLE_NAME = '"+tableName+"'";
-    	}
+	        return $"SHOW TABLES LIKE '{tableName}'";
+        }
 
         public override string GetAddCommentToColumnSql(string tableName, string columnName, string comment) {
             throw new NotImplementedException();
