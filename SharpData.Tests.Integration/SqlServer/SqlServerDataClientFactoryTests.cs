@@ -11,15 +11,15 @@ namespace Sharp.Tests.Databases.SqlServer {
         }
 
         public override Type GetDataProviderType() {
-            return typeof (SqlProvider);
+            return typeof(SqlProvider);
         }
 
         public override Type GetDataClientType() {
-            return typeof (SqlServerDataClient);
+            return typeof(SqlServerDataClient);
         }
 
         public override Type GetDialectType() {
-            return typeof (SqlDialect);
+            return typeof(SqlDialect);
         }
     }
 }

@@ -11,15 +11,15 @@ namespace Sharp.Tests.Databases.SQLite {
         }
 
         public override Type GetDataProviderType() {
-            return typeof (SqLiteProvider);
+            return typeof(SqLiteProvider);
         }
 
         public override Type GetDataClientType() {
-            return typeof (SqLiteDataClient);
+            return typeof(SqLiteDataClient);
         }
 
         public override Type GetDialectType() {
-            return typeof (SqLiteDialect);
+            return typeof(SqLiteDialect);
         }
     }
 }

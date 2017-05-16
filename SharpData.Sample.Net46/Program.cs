@@ -5,10 +5,10 @@ using Sharp.Data;
 namespace SharpData.Sample.Net46 {
     class Program {
         static void Main(string[] args) {
-            var factory = new OracleClientFactory();
+            SharpFactory.Default = new SharpFactory(new OracleClientFactory(), "Data Source=//localhost/XE;User Id=sharp;Password=sharp;");
+
             using (var client =
-                SharpFactory.Default.CreateDataClient(factory,
-                    "Data Source=//localhost/XE;User Id=sharp;Password=sharp;")) {
+                SharpFactory.Default.CreateDataClient()) {
                 new Sample().Start(client);
             }
             Console.WriteLine("Done");

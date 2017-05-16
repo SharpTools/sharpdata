@@ -27,11 +27,11 @@ namespace Sharp.Data.Databases.PostgreSql {
             return base.CreateSpecificException(exception, sql);
         }
 
-        public override string CommandToBeExecutedBeforeEachOther() {
+        public override string GetPreCommand() {
             return String.Format("SAVEPOINT {0}", SavepointId);
         }
 
-        public override string CommandToBeExecutedAfterAnExceptionIsRaised() {
+        public override string GetOnErrorCommand() {
             return String.Format("ROLLBACK TO {0}", SavepointId);
         }
     }

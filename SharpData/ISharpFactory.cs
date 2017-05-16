@@ -2,19 +2,11 @@
 
 namespace Sharp.Data {
     public interface ISharpFactory {
-        string ConnectionString { get; set; }
-        DbProviderFactory DbProviderFactory { get; set; }
-
-        IDataProvider CreateDataProvider(DbProviderFactory dbProviderFactory);
+        string ConnectionString { get; }
+        DbProviderFactory DbProviderFactory { get; }
         IDataProvider CreateDataProvider();
-
-        IDatabase CreateDatabase(DbProviderFactory dbProviderFactory, string connectionString);
         IDatabase CreateDatabase();
-
-        IDataClient CreateDataClient(DbProviderFactory dbProviderFactory, string connectionString);
         IDataClient CreateDataClient();
-
-        Dialect CreateDialect(DbProviderFactory dbProviderFactory);
         Dialect CreateDialect();
     }
 }

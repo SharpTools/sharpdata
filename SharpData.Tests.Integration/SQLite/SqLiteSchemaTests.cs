@@ -1,22 +1,22 @@
 using System.Data.SQLite;
 using System.IO;
-using Xunit;
 using Sharp.Data;
 using Sharp.Data.Databases;
 using Sharp.Tests.Databases.Data;
+using Xunit;
 
 namespace Sharp.Tests.Databases.SQLite {
-   
-	public class SqLiteSchemaTests : DataClientSchemaTests {
+    public class SqLiteSchemaTests : DataClientSchemaTests {
         public SqLiteSchemaTests() {
-            string fileName = "hot.db3";
-
+            var fileName = "hot.db3";
             if (File.Exists(fileName)) {
                 File.Delete(fileName);
             }
-
             SQLiteConnection.CreateFile(fileName);
-            _dataClient = DBBuilder.GetDataClient(DataProviderNames.SqLite);
+        }
+
+        protected override string GetDataProviderName() {
+            return DataProviderNames.SqLite;
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace Sharp.Tests.Databases.SQLite {
             }
         }
 
-    	[Fact]
+        [Fact]
         public override void Can_add_named_primary_key_to_table() {
             try {
                 base.Can_add_named_primary_key_to_table();
@@ -67,12 +67,11 @@ namespace Sharp.Tests.Databases.SQLite {
             }
         }
 
-	
 
         [Fact]
         public override void Can_remove_foreign_key_from_table() {
             try {
-                _dataClient.RemoveForeignKey("foo", "bar");
+                DataClient.RemoveForeignKey("foo", "bar");
                 Assert.True(false);
             }
             catch (NotSupportedByDialect ex) {

@@ -6,8 +6,9 @@ using System.Data.SqlClient;
 namespace SharpData.Sample.Core {
     class Program {
         static void Main(string[] args) {
-            var factory = SqlClientFactory.Instance;
-            using (var client = SharpFactory.Default.CreateDataClient(factory, "Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=sharp; Integrated Security=True; Encrypt=False; TrustServerCertificate=True; ApplicationIntent=ReadWrite;")) {
+            SharpFactory.Default = new SharpFactory(SqlClientFactory.Instance, "Data Source=(localdb)\\MSSQLLocalDB; Initial Catalog=sharp; Integrated Security=True; Encrypt=False; TrustServerCertificate=True; ApplicationIntent=ReadWrite;");
+
+            using (var client = SharpFactory.Default.CreateDataClient()) {
                 new Example().Start(client);
             }
             Console.WriteLine("Done");

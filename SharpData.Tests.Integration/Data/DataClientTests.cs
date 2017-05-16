@@ -7,37 +7,44 @@ using Sharp.Data.Schema;
 namespace Sharp.Tests.Databases.Data {
 
     public abstract class DataClientTests : IDisposable {
-        protected IDataClient _dataClient;
-        protected string tableFoo = "foo";       
-       
+        protected string TableFoo = "foo";
+        private IDataClient _dataClient;
+
+        protected IDataClient DataClient => _dataClient ?? (_dataClient = DBBuilder.GetDataClient(GetDataProviderName()));
+
+        protected abstract string GetDataProviderName();
+
+        protected DataClientTests() {
+            CleanTables();
+        }
 
 		[Fact]
 		public void Should_return_false_if_table_doesnt_exist() {
-			Assert.False(_dataClient.TableExists("foo"));
+			Assert.False(DataClient.TableExists("foo"));
 		}
 
 		[Fact]
 		public void Should_return_true_if_table_exists() {
 			CreateTableFoo();
-			Assert.True(_dataClient.TableExists("foo"));
+			Assert.True(DataClient.TableExists("foo"));
 		}
 
         protected void CreateTableFoo() {
-            _dataClient.AddTable(tableFoo,
+            DataClient.AddTable(TableFoo,
                                  Column.Int32("id").AsPrimaryKey(),
                                  Column.String("name")
-                );
+            );
         }
 
         protected void PopulateTableFoo() {
-            _dataClient.Insert.Into(tableFoo).Columns("id", "name")
+            DataClient.Insert.Into(TableFoo).Columns("id", "name")
                 .Values(1, "v1")
                 .Values(2, "v2")
-                .Values(3, "v3");
+                .Values(Int32.MaxValue, "v3");
         }
 
         protected void CreateTableBar() {
-            _dataClient.AddTable("bar",
+            DataClient.AddTable("bar",
                                  Column.Int32("id").AsPrimaryKey(),
                                  Column.Int32("id_foo1").NotNull(),
                                  Column.Int32("id_foo2").NotNull(),
@@ -48,18 +55,22 @@ namespace Sharp.Tests.Databases.Data {
 
         protected void DropTable(string tableName) {
             try {
-                _dataClient.RemoveTable(tableName);
+                DataClient.RemoveTable(tableName);
             }
             catch {}
         }
 
-        public void Dispose() {
-            DropTable(tableFoo);
+        public void CleanTables() {
+            DropTable(TableFoo);
             DropTable("bar");
             DropTable("foobar");
             DropTable("footable");
-            _dataClient.RollBack();
-            _dataClient.Dispose();
+        }
+
+        public void Dispose() {
+            CleanTables();
+            DataClient.RollBack();
+            DataClient.Dispose();
         }
     }
 }

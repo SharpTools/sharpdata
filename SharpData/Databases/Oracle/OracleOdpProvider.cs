@@ -11,24 +11,10 @@ namespace Sharp.Data.Databases.Oracle {
     public class OracleOdpProvider : DataProvider {
 
         private static OracleReflectionCache _reflectionCache = new OracleReflectionCache();
-
-        public virtual OracleReflectionCache ReflectionCache {
-            get {
-                return _reflectionCache;
-            }
-        }
-
-        public override string Name {
-            get { return DataProviderNames.OracleOdp; }
-        }
-
-        public override DatabaseKind DatabaseKind {
-            get { return DatabaseKind.Oracle; }
-        }
-
-        protected virtual string OracleDbTypeEnumName {
-            get { return "Oracle.DataAccess.Client.OracleDbType"; }
-        }
+        protected virtual string OracleDbTypeEnumName => "Oracle.DataAccess.Client.OracleDbType";
+        public virtual OracleReflectionCache ReflectionCache => _reflectionCache;
+        public override string Name => DataProviderNames.OracleOdp;
+        public override DatabaseKind DatabaseKind => DatabaseKind.Oracle;
 
         public OracleOdpProvider(DbProviderFactory dbProviderFactory) : base(dbProviderFactory) {
         }
@@ -105,21 +91,26 @@ namespace Sharp.Data.Databases.Oracle {
             }
             if (parIn.DbType.HasValue) {
                 par.DbType = parIn.DbType.Value;
+                return par;
             }
-            else {
-                par.DbType = GenericDbTypeMap.GetDbType(value.GetType());
+
+            var type = GenericDbTypeMap.GetDbType(value.GetType());
+            if (type == DbType.Boolean) {
+                type = DbType.Int32;
+                par.Value = (bool)value ? 1 : 0;
             }
-            if (par.DbType == DbType.Date) {
+            else if (type == DbType.Date) {
                 ReflectionCache.PropParameterDbType.SetValue(par, ReflectionCache.DbTypeDate, null);
             }
-            if (par.DbType == DbType.Binary) {
+            else if (type == DbType.Binary) {
                 ReflectionCache.PropParameterDbType.SetValue(par, ReflectionCache.DbTypeBlob, null);                
             }
+            par.DbType = type;
             return par;
         }
         
         public override DbParameter GetParameterCursor() {
-            DbParameter parameter = DbProviderFactory.CreateParameter();
+            var parameter = DbProviderFactory.CreateParameter();
             ReflectionCache.PropParameterDbType.SetValue(parameter, ReflectionCache.DbTypeRefCursor, null);
             return parameter;
         }

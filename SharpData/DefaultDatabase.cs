@@ -241,12 +241,12 @@ namespace Sharp.Data {
         protected ResultSet ExecuteCatchingErrors(Func<IDataReader> getReader, string call) {
             IDataReader reader = null;
             try {
-                BeforeActionVerifyIfExistisACommandToBeExecuted();
+                ExecutePreCommand();
                 reader = getReader();
                 return DataReaderToResultSetMapper.Map(reader);
             }
             catch (Exception ex) {
-                OnErrorVerifyIfExistisACommandToBeExecuted();
+                ExecuteOnErrorCommand();
                 throw Provider.CreateSpecificException(ex, call);
             }
             finally {
@@ -256,35 +256,35 @@ namespace Sharp.Data {
 
         protected T ExecuteCatchingErrors<T>(Func<T> action, string call) {
             try {
-                BeforeActionVerifyIfExistisACommandToBeExecuted();
+                ExecutePreCommand();
                 return action();
             }
             catch (Exception ex) {
-                OnErrorVerifyIfExistisACommandToBeExecuted();
+                ExecuteOnErrorCommand();
                 throw Provider.CreateSpecificException(ex, call);
             }
         }
 
         protected void ExecuteCatchingErrors(Action action, string call) {
             try {
-                BeforeActionVerifyIfExistisACommandToBeExecuted();
+                ExecutePreCommand();
                 action();
             }
             catch (Exception ex) {
-                OnErrorVerifyIfExistisACommandToBeExecuted();
+                ExecuteOnErrorCommand();
                 throw Provider.CreateSpecificException(ex, call);
             }
         }
 
-        protected void OnErrorVerifyIfExistisACommandToBeExecuted() {
-            if (!String.IsNullOrEmpty(Provider.CommandToBeExecutedAfterAnExceptionIsRaised())) {
-                TryExecuteSql(Provider.CommandToBeExecutedAfterAnExceptionIsRaised(), new object[] { });
+        protected void ExecutePreCommand() {
+            if (!String.IsNullOrEmpty(Provider.GetPreCommand())) {
+                TryExecuteSql(Provider.GetPreCommand(), new object[] { });
             }
         }
 
-        protected void BeforeActionVerifyIfExistisACommandToBeExecuted() {
-            if (!String.IsNullOrEmpty(Provider.CommandToBeExecutedBeforeEachOther())) {
-                TryExecuteSql(Provider.CommandToBeExecutedBeforeEachOther(), new object[] { });
+        protected void ExecuteOnErrorCommand() {
+            if (!String.IsNullOrEmpty(Provider.GetOnErrorCommand())) {
+                TryExecuteSql(Provider.GetOnErrorCommand(), new object[] { });
             }
         }
     }

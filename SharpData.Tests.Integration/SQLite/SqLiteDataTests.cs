@@ -1,42 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
-using Xunit;
 using Sharp.Data;
 using Sharp.Data.Databases;
 using Sharp.Tests.Databases.Data;
+using Xunit;
 
 namespace Sharp.Tests.Databases.SQLite {
+    public class SqLiteDataTests : DataClientDataTests {
+        public SqLiteDataTests() {
+            var fileName = "hot.db3";
+            if (File.Exists(fileName)) {
+                File.Delete(fileName);
+            }
+            SQLiteConnection.CreateFile(fileName);
+        }
 
-	public class SqLiteDataTests : DataClientDataTests {
-
-		public SqLiteDataTests() {
-			string fileName = "hot.db3";
-
-			if (File.Exists(fileName)) {
-				File.Delete(fileName);
-			}
-
-			SQLiteConnection.CreateFile(fileName);
-
-            _dataClient = DBBuilder.GetDataClient(DataProviderNames.SqLite);
-		}
-
-
-		[Fact]
-		public override void Can_insert_returning_id() {
-			try {
-				base.Can_insert_returning_id();
-				Assert.Fail();
-			}
-			catch (NotSupportedByDialect ex) {
-				Assert.Equal(ex.DialectName, "SqLiteDialect");
-				Assert.Equal(ex.FunctionName, "GetInsertReturningColumnSql");
-			}
-		}
-	}
+        protected override string GetDataProviderName() {
+            return DataProviderNames.SqLite;
+        }
+        
+        [Fact]
+        public override void Can_insert_returning_id() {
+            var ex = Assert.Throws<NotSupportedByDialect>(() => { base.Can_insert_returning_id(); });
+            Assert.Equal(ex.DialectName, "SqLiteDialect");
+            Assert.Equal(ex.FunctionName, "GetInsertReturningColumnSql");
+        }
+    }
 }

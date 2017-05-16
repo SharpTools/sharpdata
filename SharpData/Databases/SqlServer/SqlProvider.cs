@@ -9,20 +9,16 @@ namespace Sharp.Data.Providers {
         public SqlProvider(DbProviderFactory dbProviderFactory) : base(dbProviderFactory) {
         }
 
-        public override string Name {
-            get { return DataProviderNames.SqlServer; }
-        }
+        public override string Name => DataProviderNames.SqlServer;
 
-        public override DatabaseKind DatabaseKind {
-            get { return DatabaseKind.SqlServer; }
-        }
+        public override DatabaseKind DatabaseKind => DatabaseKind.SqlServer;
 
         public override DatabaseException CreateSpecificException(System.Exception exception, string sql) {
             var numberProp = exception.GetType().GetProperty("Number", ReflectionHelper.NoRestrictions);
             if(numberProp == null) {
                 return base.CreateSpecificException(exception, sql);
             }
-            int? number = numberProp.GetValue(exception) as int?;
+            var number = numberProp.GetValue(exception) as int?;
             if(number == 208) {
                 return new TableNotFoundException(exception.Message, exception, sql);
             }

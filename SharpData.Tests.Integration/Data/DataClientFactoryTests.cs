@@ -6,14 +6,16 @@ namespace Sharp.Tests.Databases.Data {
     public abstract class DataClientFactoryTests {
 	    private const string ConnectionString = "connectionString";
 
-        public abstract IDataClient CreateDataClient();
+        public IDataClient CreateDataClient() {
+            return DBBuilder.GetDataClient(GetDatabaseType());
+        }
 
         [Fact]
         public virtual void Can_create_dataclient() {
             var client = CreateDataClient();
 
             //check connection string
-            Assert.Equal(ConnectionString, client.Database.ConnectionString);
+            Assert.Equal(DBBuilder.GetConnectionString(GetDatabaseType()), client.Database.ConnectionString);
             
             //check DataClient type
             Assert.True(client.GetType() == GetDataClientType());

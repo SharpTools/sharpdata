@@ -8,15 +8,10 @@ using Sharp.Util;
 
 namespace Sharp.Data.Databases.Oracle {
 	public class OracleDialect : Dialect {
-		public override string ParameterPrefix {
-			get { return ":"; }
-		}
+		public override string ParameterPrefix => ":";
+	    public override string ScriptSeparator => "/";
 
-        public override string ScriptSeparator {
-            get { return "/"; }
-        }
-
-        public static string SequencePrefix = "SEQ_";
+	    public static string SequencePrefix = "SEQ_";
         public static string TriggerPrefix = "TR_INC_";
         public static string PrimaryKeyPrefix = "PK_";
 
@@ -72,11 +67,10 @@ namespace Sharp.Data.Databases.Oracle {
 		}
 
 		public override string[] GetDropTableSqls(string tableName) {
-			var sqls = new string[2];
-			sqls[0] = String.Format("drop table {0} cascade constraints", tableName);
-			sqls[1] = String.Format("begin execute immediate 'drop sequence {0}{1}'; exception when others then null; end;",
-                                    SequencePrefix, tableName);
-			return sqls;
+		    return new [] {
+		        $"drop table {tableName} cascade constraints",
+		        $"begin execute immediate 'drop sequence {SequencePrefix}{tableName}'; exception when others then null; end;"
+		    };
 		}
 
 	    public override string GetForeignKeySql(string fkName, string table, string column, string referencingTable,
@@ -139,7 +133,7 @@ namespace Sharp.Data.Databases.Oracle {
 			                    	: "";
 
 			//name type default nullable
-			return String.Format("{0} {1}{2} {3}", col.ColumnName, colType, colDefault, colNullable);
+			return $"{col.ColumnName} {colType}{colDefault} {colNullable}";
 		}
 
 		public override string GetColumnValueToSql(object value) {
@@ -185,7 +179,7 @@ namespace Sharp.Data.Databases.Oracle {
 				case DbType.Int32:
 					return "NUMBER(10)";
 				case DbType.Int64:
-					return "NUMBER(20)";
+					return "NUMBER(19)";
 				case DbType.Single:
 					return "FLOAT(24)";
 				case DbType.String:
@@ -195,7 +189,6 @@ namespace Sharp.Data.Databases.Oracle {
 				case DbType.Time:
 					return "DATE";
 			}
-
 			throw new DataTypeNotAvailableException(String.Format("The type {0} is no available for oracle", type));
 		}
 

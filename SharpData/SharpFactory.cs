@@ -15,7 +15,15 @@ namespace Sharp.Data {
         public string ConnectionString { get; set; }
         public DbProviderFactory DbProviderFactory { get; set; }
 
-        private Dictionary<string, Type> _dbFactoryTypes = new Dictionary<string, Type>();
+        private static Dictionary<string, Type> _dbFactoryTypes = new Dictionary<string, Type> {
+            {DataProviderNames.OracleManaged, typeof(OracleManagedDbFactory)},
+            {DataProviderNames.OracleOdp, typeof(OracleOdpDbFactory)},
+            {DataProviderNames.MySql, typeof(MySqlDbFactory)},
+            {DataProviderNames.OleDb, typeof(OleDbDbFactory)},
+            {DataProviderNames.SqLite, typeof(SqLiteDbFactory)},
+            {DataProviderNames.SqlServer, typeof(SqlServerDbFactory)},
+            {DataProviderNames.PostgreSql, typeof(PostgreDbFactory)}
+        };
         private Dictionary<string, DbFactory> _dbFactories = new Dictionary<string, DbFactory>();
 
         public SharpFactory() {

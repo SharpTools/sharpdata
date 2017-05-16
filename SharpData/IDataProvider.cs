@@ -13,7 +13,7 @@ namespace Sharp.Data {
         DbParameter GetParameter(In parameter, bool isBulk);
         DbParameter GetParameterCursor();
         DatabaseException CreateSpecificException(Exception exception, string sql);
-        string CommandToBeExecutedBeforeEachOther();
-        string CommandToBeExecutedAfterAnExceptionIsRaised();
+        string GetPreCommand();
+        string GetOnErrorCommand();
     }
 }
