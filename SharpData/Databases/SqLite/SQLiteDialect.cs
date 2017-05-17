@@ -28,7 +28,7 @@ namespace Sharp.Data.Databases.SqLite {
 
             for (int i = 0; i < size; i++) {
                 Column col = table.Columns[i];
-                sb.Append(GetColumnToSqlWhenCreate(col));
+                sb.Append(GetColumnToSqlWhenCreating(col));
                 if (col.IsPrimaryKey) {
 					primaryKeyColumns.Add(col.ColumnName);
                 }
@@ -46,7 +46,7 @@ namespace Sharp.Data.Databases.SqLite {
             return new[] {sb.ToString()};
         }
 
-        public override string GetColumnToSqlWhenCreate(Column col) {
+        public override string GetColumnToSqlWhenCreating(Column col) {
         	var colAutoIncrement = "";
 			if(col.IsAutoIncrement) {
 				colAutoIncrement = "autoincrement";
@@ -89,7 +89,7 @@ namespace Sharp.Data.Databases.SqLite {
         }
 
         public override string GetAddColumnSql(string table, Column column) {
-            return String.Format("alter table {0} add {1}", table, GetColumnToSqlWhenCreate(column));
+            return String.Format("alter table {0} add {1}", table, GetColumnToSqlWhenCreating(column));
         }
 
         public override string[] GetDropColumnSql(string table, string columnName) {

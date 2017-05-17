@@ -42,7 +42,7 @@ namespace Sharp.Tests.Databases {
                 .Size(255)
                 .NotNull().Object;
 
-            string sql = _dialect.GetColumnToSqlWhenCreate(column);
+            string sql = _dialect.GetColumnToSqlWhenCreating(column);
 
             AssertSql.AreEqual(GetResultFor_Can_convert_column_to_sql__with_not_null(), sql);
         }
@@ -54,7 +54,7 @@ namespace Sharp.Tests.Databases {
                 .AsPrimaryKey()
                 .Object;
 
-            string sql = _dialect.GetColumnToSqlWhenCreate(column);
+            string sql = _dialect.GetColumnToSqlWhenCreating(column);
 
             AssertSql.AreEqual(GetResultFor_Can_convert_column_to_sql__with_primary_key(), sql);
         }
@@ -63,7 +63,7 @@ namespace Sharp.Tests.Databases {
         public virtual void Can_convert_column_to_sql__autoIncrement() {
             Column column = Column.AutoIncrement("col").Object;
 
-            string sql = _dialect.GetColumnToSqlWhenCreate(column);
+            string sql = _dialect.GetColumnToSqlWhenCreating(column);
 
             AssertSql.AreEqual(GetResultFor_Can_convert_column_to_sql__autoIncrement(), sql);
         }
@@ -73,7 +73,7 @@ namespace Sharp.Tests.Databases {
             Column column = Column.String("col")
                                   .DefaultValue("some string").Object;
 
-            string sql = _dialect.GetColumnToSqlWhenCreate(column);
+            string sql = _dialect.GetColumnToSqlWhenCreating(column);
 
             AssertSql.AreEqual(GetResultFor_Can_convert_column_to_sql__default_value(), sql.ToUpper());
         }
@@ -82,7 +82,7 @@ namespace Sharp.Tests.Databases {
         public virtual void Can_convert_column_to_sql__autoIncrement_and_primary_key() {
             Column column = Column.AutoIncrement("col").AsPrimaryKey().Object;
 
-            string sql = _dialect.GetColumnToSqlWhenCreate(column);
+            string sql = _dialect.GetColumnToSqlWhenCreating(column);
 
             AssertSql.AreEqual(GetResultFor_Can_convert_column_to_sql__autoIncrement_and_primary_key(), sql);
         }

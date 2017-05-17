@@ -1,4 +1,6 @@
 using Sharp.Data.Databases;
+using Sharp.Data.Exceptions;
+using Sharp.Data.Schema;
 using Sharp.Tests.Databases.Data;
 using Xunit;
 
@@ -6,6 +8,15 @@ namespace Sharp.Tests.Databases.Mysql {
     public class MySqlSchemaTests : DataClientSchemaTests {
         protected override string GetDataProviderName() {
             return DataProviderNames.MySql;
+        }
+
+        [Fact]
+        public override void Can_create_table_with_autoIncrement() {
+            Assert.Throws<NotSupportedByDatabaseException>(() => {
+                DataClient.AddTable(TableFoo,
+                    Column.AutoIncrement("id"),
+                    Column.String("name"));
+            });
         }
 
         [Fact(Skip = "Not implemented. Pull requests welcome :)")]

@@ -5,11 +5,9 @@ namespace Sharp.Data.Schema {
 
         public Column Object { get; protected set; }
 
-        public FluentColumn(string name) : this(name, DbType.String, -1) { }
-
         public FluentColumn(string name, DbType type) : this(name, type, -1) { }
 
-        public FluentColumn(string name, DbType type, int size) {
+        public FluentColumn(string name, DbType type = DbType.String, int size = -1) {
             Object = new Column(name, type);
             if (size > 0) {
                 Object.Size = size;

@@ -11,7 +11,8 @@ namespace Sharp.Tests.Databases.Mysql {
     	}
 
     	protected override string GetResultFor_Can_create_check_if_table_exists_sql() {
-    		return "select count(TABLE_NAME) from INFORMATION_SCHEMA where TABLE_NAME = 'mytable'";
+	        return
+	            "select count(table_name) from information_schema.tables where table_schema = SCHEMA() and table_name = 'mytable'";
 		}
 
     	protected override string GetResultFor_Can_generate_count_sql() {

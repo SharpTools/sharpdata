@@ -34,7 +34,7 @@ namespace Sharp.Data.Databases.SqlServer {
 
             int size = table.Columns.Count;
             for (int i = 0; i < size; i++) {
-                sb.Append(GetColumnToSqlWhenCreate(table.Columns[i]));
+                sb.Append(GetColumnToSqlWhenCreating(table.Columns[i]));
                 if (i != size - 1) {
                     sb.AppendLine(",");
                 }
@@ -53,7 +53,7 @@ namespace Sharp.Data.Databases.SqlServer {
             return sqls.ToArray();
         }
 
-        public override string GetColumnToSqlWhenCreate(Column col) {
+        public override string GetColumnToSqlWhenCreating(Column col) {
             string colType = GetDbTypeString(col.Type, col.Size);
             string colNullable = col.IsNullable ? WordNull : WordNotNull;
             string colAutoIncrement = col.IsAutoIncrement ? "identity(1,1)" : "";
@@ -252,7 +252,7 @@ namespace Sharp.Data.Databases.SqlServer {
         }
 
         public override string GetModifyColumnSql(string tableName, string columnName, Column columnDefinition) {
-            return String.Format("alter table {0} alter column {1}", tableName, GetColumnToSqlWhenCreate(columnDefinition));
+            return String.Format("alter table {0} alter column {1}", tableName, GetColumnToSqlWhenCreating(columnDefinition));
         }
     }
 }

@@ -14,16 +14,14 @@ namespace Sharp.Data.Databases.PostgreSql {
             _postgreSqlConstraintsDialect = new PostgreSqlConstraintsDialect();
         }
 
-        public override string ParameterPrefix {
-            get { return ":"; }
-        }
+        public override string ParameterPrefix => ":";
 
         public override DbType GetDbType(string sqlType, int dataPrecision) {
             throw new NotImplementedException();
         }
 
         public override string[] GetCreateTableSqls(Table table) {
-            return _postgreSqlTableDialect.GetCreateTableSqls(table, GetColumnToSqlWhenCreate, GetPrimaryKeySql);
+            return _postgreSqlTableDialect.GetCreateTableSqls(table, GetColumnToSqlWhenCreating, GetPrimaryKeySql);
         }
 
         public override string[] GetDropTableSqls(string tableName) {
@@ -46,7 +44,7 @@ namespace Sharp.Data.Databases.PostgreSql {
             return PostgreSqlDbTypesDialect.GetDbTypeString(type, precision);
         }
 
-        public override string GetColumnToSqlWhenCreate(Column col) {
+        public override string GetColumnToSqlWhenCreating(Column col) {
             return _postgreSqlColumnDialect.GetColumnToSqlWhenCreate(col);
         }
 

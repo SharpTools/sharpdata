@@ -31,8 +31,8 @@ namespace Sharp.Tests.Databases.Data {
 
         protected void CreateTableFoo() {
             DataClient.AddTable(TableFoo,
-                                 Column.Int32("id").AsPrimaryKey(),
-                                 Column.String("name")
+                                Column.Int32("id").AsPrimaryKey(),
+                                Column.String("name")
             );
         }
 

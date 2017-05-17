@@ -11,7 +11,7 @@ namespace Sharp.Data {
         }
 
         public override string ToString() {
-            return String.Format("Error running SQL: {0}\r\n{1}", SQL, base.ToString());
+            return $"Error running SQL: {SQL}\r\n{base.ToString()}";
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Sharp.Data.Databases.MySql {
 
 			var size = table.Columns.Count;
 			for (var i = 0; i < size; i++) {
-				sb.Append(GetColumnToSqlWhenCreate(table.Columns[i]));
+				sb.Append(GetColumnToSqlWhenCreating(table.Columns[i]));
 				if (i != size - 1) {
 					sb.AppendLine(",");
 				}
@@ -34,15 +34,10 @@ namespace Sharp.Data.Databases.MySql {
 				}
 			}
 
-            if (sb.ToString().Contains("AUTO_INCREMENT PRIMARY KEY") && primaryKeyColumns.Any()) {
-                sb.Replace("PRIMARY KEY", "");
-            }
-
 			//primary keys
 			if (primaryKeyColumns.Count > 0) {
 				sb.AppendLine(String.Format(", primary key ({0})", String.Join(",", primaryKeyColumns.ToArray())));
 			}
-
 			sb.AppendLine(")");
 			sqls.Add(sb.ToString());
 			return sqls.ToArray();
@@ -79,28 +74,52 @@ namespace Sharp.Data.Databases.MySql {
     	protected override string GetDbTypeString(DbType type, int precision) {
             switch (type) {
                 case DbType.String:
-                    if (precision > 0) {
+                    if (precision == 0) {
+                        return "VARCHAR(255)";
+                    }
+                    else if (precision <= 255) {
                         return "VARCHAR(" + precision + ")";
                     }
-                    return "VARCHAR(255)";
-				case DbType.Binary: return "BINARY";
-				case DbType.Double: return "DOUBLE";
-				case DbType.Boolean: return "BOOLEAN";
+                    else if (precision <= 65536) {
+                        return "TEXT";
+                    }
+                    else if (precision <= 65536) {
+                        return "MEDIUMTEXT";
+                    }
+                    else {
+                        return "LONGTEXT";
+                    }
+				case DbType.Binary:
+				    if (precision > 0 && precision <= 255) {
+				        return "TINYBLOB";
+				    }
+				    else if (precision <= 65536) {
+				        return "BLOB";
+				    }
+				    else if (precision <= 65536) {
+				        return "MEDIUMBLOB";
+				    }
+				    else {
+				        return "LONGBLOB";
+				    }
+                case DbType.Boolean: return "BOOLEAN";
 				case DbType.Decimal: return "DECIMAL";
 				case DbType.Guid: return "VARCHAR(40)";
 				case DbType.Int16: return "SMALLINT";
 				case DbType.Int32: return "INT";
-				case DbType.Single: return "INT";
-				case DbType.Int64: return "BIGINT";
-				case DbType.Date: return "DATETIME";
+                case DbType.Int64: return "BIGINT";
+                case DbType.Single: return "FLOAT";
+                case DbType.Double: return "DOUBLE";
+                case DbType.Date: return "DATE";
+                case DbType.DateTime: return "DATETIME";
+                case DbType.Time: return "TIME";
             }
-
             throw new DataTypeNotAvailableException(String.Format("The type {0} is no available for mysql", type.ToString()));
         }
 
-        public override string GetColumnToSqlWhenCreate(Column col) {
+        public override string GetColumnToSqlWhenCreating(Column col) {
             var nullOption = col.IsNullable ? WordNull : WordNotNull;
-            var autoIncrement = col.IsAutoIncrement ? " AUTO_INCREMENT PRIMARY KEY" : "";
+            var autoIncrement = col.IsAutoIncrement ? " AUTO_INCREMENT " : "";
             var defaultValue = col.DefaultValue != null ? " default "+GetColumnValueToSql(col.DefaultValue): "";
             return $"{col.ColumnName} {GetDbTypeString(col.Type, col.Size)} {nullOption}{defaultValue}{autoIncrement}";
         }
@@ -122,8 +141,9 @@ namespace Sharp.Data.Databases.MySql {
         }
 
     	public override string GetTableExistsSql(string tableName) {
-	        return $"SHOW TABLES LIKE '{tableName}'";
-        }
+	        return
+	            $"select count(table_name) from information_schema.tables where table_schema = SCHEMA() and table_name = '{tableName}'";
+	    }
 
         public override string GetAddCommentToColumnSql(string tableName, string columnName, string comment) {
             throw new NotImplementedException();
