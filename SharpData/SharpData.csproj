@@ -2,14 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
-    <Version>2.0.0-beta2</Version>
+    <Version>2.0.0-beta3</Version>
     <Authors>Andre Carlucci</Authors>
     <Company>Andre Carlucci</Company>
     <Description>An awesome ORM for querying and modifying databases.</Description>
     <PackageProjectUrl>https://github.com/SharpTools/sharpdata</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/SharpTools/sharpdata/master/LICENSE</PackageLicenseUrl>
-    <PackageTags>orm, netstandard, migrations</PackageTags>
+    <PackageTags>orm, netstandard, migrations, .netcore, databases</PackageTags>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageReleaseNotes>Oracle, SqlServer and Mysql ok. Postgre and Sqlite still to go.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
