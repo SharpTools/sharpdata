@@ -59,7 +59,7 @@ namespace SharpData {
 
         private DbProviderType GetDbProviderType(DbProviderFactory dbProviderFactory) {
             var name = dbProviderFactory.GetType().Namespace;
-            return DbProviderTypeExtensions.GetDbProviderByName(name);
+            return DbProviderTypeExtensions.GetDbProviderByNamespace(name);
         }
 
         private void EnsureProvider(DbProviderType databaseProviderName) {

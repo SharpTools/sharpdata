@@ -12,7 +12,6 @@ namespace SharpData.Databases {
         OleDb,
         PostgreSql
     }
-
     public static class DbProviderTypeExtensions {
         public static string GetProviderName(this DbProviderType type) {
             switch (type) {
@@ -35,7 +34,7 @@ namespace SharpData.Databases {
             }
         }
 
-        public static DbProviderType GetDbProviderByName(string name) {
+        public static DbProviderType GetDbProviderByNamespace(string name) {
             if (name == DbProviderType.OracleManaged.GetProviderName()) return DbProviderType.OracleManaged;
             if (name == DbProviderType.OracleOdp.GetProviderName()) return DbProviderType.OracleOdp;
             if (name == DbProviderType.MySql.GetProviderName()) return DbProviderType.MySql;
@@ -48,8 +47,8 @@ namespace SharpData.Databases {
 
         public static List<DbProviderType> GetAll() {
             return Enum.GetValues(typeof(DbProviderType))
-                       .Cast<DbProviderType>()
-                       .ToList();
+                .Cast<DbProviderType>()
+                .ToList();
         }
     }
 }
