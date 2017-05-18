@@ -1,10 +1,10 @@
-﻿using Sharp.Data.Databases;
-using Sharp.Tests.Databases.Data;
+﻿using SharpData.Databases;
+using SharpData.Tests.Integration.Data;
 
-namespace Sharp.Tests.Databases.PostgreSql {
+namespace SharpData.Tests.Integration.PostgreSql {   
     public class PostgreSqlSchemaTests : DataClientSchemaTests {
-        protected override string GetDataProviderName() {
-            return DataProviderNames.PostgreSql;
+        protected override DbProviderType GetDataProviderName() {
+            return DbProviderType.PostgreSql;
         }
     }
 }

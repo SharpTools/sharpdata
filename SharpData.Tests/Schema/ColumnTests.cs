@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using System.Data;
-using Sharp.Data.Schema;
+using SharpData.Schema;
 
 namespace Sharp.Tests.Data.Schema {
    

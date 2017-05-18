@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace Sharp.Tests.Databases {
+namespace SharpData.Tests.Databases {
     public static class AssertSql {
 
         public static void AreEqual(string sql1, string sql2) {

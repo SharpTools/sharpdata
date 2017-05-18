@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace Sharp.Data.Databases.Oracle {
+namespace SharpData.Databases.Oracle {
     public class OracleOdpDbFactory : OracleManagedDbFactory {
         public OracleOdpDbFactory(DbProviderFactory dbProviderFactory, string connectionString)
             : base(dbProviderFactory, connectionString) {

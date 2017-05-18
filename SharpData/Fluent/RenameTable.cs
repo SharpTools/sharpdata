@@ -1,4 +1,4 @@
-﻿namespace Sharp.Data.Fluent {
+﻿namespace SharpData.Fluent {
     public class RenameTable : DataClientAction, IRenameTableTo {
         private string _newName;
 

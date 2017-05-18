@@ -1,6 +1,6 @@
 ﻿using System;
 using Oracle.ManagedDataAccess.Client;
-using Sharp.Data;
+using SharpData;
 
 namespace SharpData.Sample.Net46 {
     class Program {

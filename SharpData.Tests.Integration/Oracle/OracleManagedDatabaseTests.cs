@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Data;
+using SharpData.Databases;
 using Xunit;
-using Sharp.Data;
-using Sharp.Data.Databases;
-using Sharp.Data.Databases.Oracle;
-using Sharp.Data.Schema;
-using Sharp.Data.Util;
-using Sharp.Tests.Databases.Data;
+using SharpData.Databases.Oracle;
+using SharpData.Schema;
+using SharpData.Tests.Integration.Data;
+using SharpData.Util;
 
-namespace Sharp.Tests.Databases.Oracle {
+namespace SharpData.Tests.Integration.Oracle {
    
     public class OracleManagedDatabaseTests : DatabaseTests {
 
         public OracleManagedDatabaseTests() {
             CleanTables();
         }
-        protected override string GetDataProviderName() {
-            return DataProviderNames.OracleManaged;
+        protected override DbProviderType GetDataProviderName() {
+            return DbProviderType.OracleManaged;
         }
 
         public override void Can_bulk_insert_stored_procedure() {
@@ -55,6 +54,7 @@ namespace Sharp.Tests.Databases.Oracle {
 
             Assert.Equal(5, res.Count);
         }
+
         [Fact]
         public override void Can_bulk_insert_stored_procedure_with_first_item_null() {
             DataClient.AddTable(TableFoo, Column.Decimal("colDecimal"));

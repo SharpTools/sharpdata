@@ -1,4 +1,4 @@
-﻿namespace Sharp.Data.Databases.Oracle {
+﻿namespace SharpData.Databases.Oracle {
     public class OracleDataClient : DataClient {
         public OracleDataClient(IDatabase database, Dialect dialect) : base(database, dialect) {
         }

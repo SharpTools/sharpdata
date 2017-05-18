@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Sharp.Data {
+namespace SharpData {
 	public class ResultSet : List<TableRow> {
         private List<string> _originalColumnNames;
 		private Dictionary<string, int> _cols;

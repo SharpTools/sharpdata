@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Sharp.Data;
-using Sharp.Data.Schema;
+using SharpData;
+using SharpData.Schema;
 using Xunit;
-using Sharp.Data.Fluent;
+using SharpData.Fluent;
 
 namespace Sharp.Tests.Data {
    

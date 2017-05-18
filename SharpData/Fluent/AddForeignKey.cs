@@ -1,7 +1,7 @@
-using Sharp.Data;
-using Sharp.Data.Schema;
+using SharpData;
+using SharpData.Schema;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
 
     public class AddForeignKey : DataClientAction, IAddForeignKeyOnColumn, IAddForeignKeyOfTable, IAddForeignKeyReferencingColumn, IAddForeignKeyOnDelete {
         

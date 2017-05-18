@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace Sharp.Data {
+namespace SharpData {
     public class Database : DefaultDatabase, IDatabase {
         public Database(IDataProvider provider, string connectionString)
             : base(provider, connectionString) {

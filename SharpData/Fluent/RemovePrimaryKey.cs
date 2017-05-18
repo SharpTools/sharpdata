@@ -1,4 +1,4 @@
-﻿namespace Sharp.Data.Fluent {
+﻿namespace SharpData.Fluent {
     public class RemovePrimaryKey : RemoveItemFromTable {
         public RemovePrimaryKey(IDataClient dataClient, string primaryKeyName) : base(dataClient) {
             ItemName = primaryKeyName;

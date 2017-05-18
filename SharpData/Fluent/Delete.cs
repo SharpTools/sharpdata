@@ -1,6 +1,6 @@
-using Sharp.Data.Filters;
+using SharpData.Filters;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class Delete : DataClientAction {
 
         public int AfectedRows { get; set; }

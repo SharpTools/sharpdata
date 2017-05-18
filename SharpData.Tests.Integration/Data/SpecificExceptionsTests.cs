@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using SharpData.Exceptions;
+using SharpData.Schema;
 using Xunit;
-using Sharp.Data;
-using Sharp.Data.Exceptions;
-using Sharp.Data.Schema;
 
-namespace Sharp.Tests.Databases.Data {
+namespace SharpData.Tests.Integration.Data {
     public abstract class SpecificExceptionsTests : IDisposable {
 
         protected IDataClient _dataClient;

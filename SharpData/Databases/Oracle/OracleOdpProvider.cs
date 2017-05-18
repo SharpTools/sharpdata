@@ -3,17 +3,17 @@ using System.Collections;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
-using Sharp.Data.Exceptions;
-using Sharp.Data.Util;
+using SharpData.Exceptions;
+using SharpData.Util;
 using System.Reflection;
 
-namespace Sharp.Data.Databases.Oracle {
+namespace SharpData.Databases.Oracle {
     public class OracleOdpProvider : DataProvider {
 
         private static OracleReflectionCache _reflectionCache = new OracleReflectionCache();
         protected virtual string OracleDbTypeEnumName => "Oracle.DataAccess.Client.OracleDbType";
         public virtual OracleReflectionCache ReflectionCache => _reflectionCache;
-        public override string Name => DataProviderNames.OracleOdp;
+        public override DbProviderType Name => DbProviderType.OracleOdp;
         public override DatabaseKind DatabaseKind => DatabaseKind.Oracle;
 
         public OracleOdpProvider(DbProviderFactory dbProviderFactory) : base(dbProviderFactory) {

@@ -1,7 +1,7 @@
 using System.Data;
 using System.Diagnostics;
 
-namespace Sharp.Data {
+namespace SharpData {
 	[DebuggerDisplay("[{Name}][{Value}]")]
     public class In {
         public string Name { get; set; }

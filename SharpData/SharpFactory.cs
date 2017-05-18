@@ -1,40 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using Sharp.Data.Databases;
-using Sharp.Data.Databases.MySql;
-using Sharp.Data.Databases.Oracle;
-using Sharp.Data.Databases.PostgreSql;
-using Sharp.Data.Databases.SqLite;
-using Sharp.Data.Databases.SqlServer;
+using SharpData.Databases;
+using SharpData.Databases.MySql;
+using SharpData.Databases.Oracle;
+using SharpData.Databases.PostgreSql;
+using SharpData.Databases.SqLite;
+using SharpData.Databases.SqlServer;
 using System.Data.Common;
-using System.Reflection;
 
-namespace Sharp.Data {
+namespace SharpData {
     public class SharpFactory : ISharpFactory {
 
         public string ConnectionString { get; set; }
         public DbProviderFactory DbProviderFactory { get; set; }
 
-        private static Dictionary<string, Type> _dbFactoryTypes = new Dictionary<string, Type> {
-            {DataProviderNames.OracleManaged, typeof(OracleManagedDbFactory)},
-            {DataProviderNames.OracleOdp, typeof(OracleOdpDbFactory)},
-            {DataProviderNames.MySql, typeof(MySqlDbFactory)},
-            {DataProviderNames.OleDb, typeof(OleDbDbFactory)},
-            {DataProviderNames.SqLite, typeof(SqLiteDbFactory)},
-            {DataProviderNames.SqlServer, typeof(SqlServerDbFactory)},
-            {DataProviderNames.PostgreSql, typeof(PostgreDbFactory)}
+        private static Dictionary<DbProviderType, Type> _dbFactoryTypes = new Dictionary<DbProviderType, Type> {
+            {DbProviderType.OracleManaged, typeof(OracleManagedDbFactory)},
+            {DbProviderType.OracleOdp, typeof(OracleOdpDbFactory)},
+            {DbProviderType.MySql, typeof(MySqlDbFactory)},
+            {DbProviderType.OleDb, typeof(OleDbDbFactory)},
+            {DbProviderType.SqLite, typeof(SqLiteDbFactory)},
+            {DbProviderType.SqlServer, typeof(SqlServerDbFactory)},
+            {DbProviderType.PostgreSql, typeof(PostgreDbFactory)}
         };
-        private Dictionary<string, DbFactory> _dbFactories = new Dictionary<string, DbFactory>();
-
-        public SharpFactory() {
-            _dbFactoryTypes.Add(DataProviderNames.OracleManaged, typeof(OracleManagedDbFactory));
-            _dbFactoryTypes.Add(DataProviderNames.OracleOdp, typeof(OracleOdpDbFactory));
-            _dbFactoryTypes.Add(DataProviderNames.MySql, typeof(MySqlDbFactory));
-            _dbFactoryTypes.Add(DataProviderNames.OleDb, typeof(OleDbDbFactory));
-            _dbFactoryTypes.Add(DataProviderNames.SqLite, typeof(SqLiteDbFactory));
-            _dbFactoryTypes.Add(DataProviderNames.SqlServer, typeof(SqlServerDbFactory));
-            _dbFactoryTypes.Add(DataProviderNames.PostgreSql, typeof(PostgreDbFactory));
-        }
+        private Dictionary<DbProviderType, DbFactory> _dbFactories = new Dictionary<DbProviderType, DbFactory>();
 
         public SharpFactory(DbProviderFactory dbProviderFactory, string connectionString) {
             ConnectionString = connectionString;
@@ -62,17 +51,18 @@ namespace Sharp.Data {
         }
 
         private DbFactory GetConfig(DbProviderFactory dbProviderFactory, string connectionString) {
-            var providerName = GetProviderName(dbProviderFactory);
-            EnsureProvider(providerName);
+            var dbProviderType = GetDbProviderType(dbProviderFactory);
+            EnsureProvider(dbProviderType);
             EnsureProviderInstance(dbProviderFactory, connectionString);
-            return _dbFactories[providerName];
+            return _dbFactories[dbProviderType];
         }
 
-        private string GetProviderName(DbProviderFactory dbProviderFactory) {
-            return dbProviderFactory.GetType().Namespace;
+        private DbProviderType GetDbProviderType(DbProviderFactory dbProviderFactory) {
+            var name = dbProviderFactory.GetType().Namespace;
+            return DbProviderTypeExtensions.GetDbProviderByName(name);
         }
 
-        private void EnsureProvider(string databaseProviderName) {
+        private void EnsureProvider(DbProviderType databaseProviderName) {
             lock (_sync) {
                 if (!_dbFactoryTypes.ContainsKey(databaseProviderName)) {
                     throw new ProviderNotFoundException("SharpData does not support provider " + databaseProviderName);
@@ -81,7 +71,7 @@ namespace Sharp.Data {
         }
 
         private void EnsureProviderInstance(DbProviderFactory dbProviderFactory, string connectionString) {
-            var databaseProviderName = GetProviderName(dbProviderFactory);
+            var databaseProviderName = GetDbProviderType(dbProviderFactory);
             lock (_sync) {
                 if (!_dbFactories.ContainsKey(databaseProviderName)) {
                     _dbFactories.Add(databaseProviderName, (DbFactory)Activator.CreateInstance(_dbFactoryTypes[databaseProviderName], dbProviderFactory, connectionString));
@@ -92,16 +82,7 @@ namespace Sharp.Data {
 
         }
 
-        private static ISharpFactory _default;
-        public static ISharpFactory Default {
-            get {
-                lock (_sync) {
-                    return _default ?? (_default = new SharpFactory());
-                }
-            }
-            set { _default = value; }
-        }
-
+        public static ISharpFactory Default {get; set; }
         private static object _sync = new object();
     }
 }

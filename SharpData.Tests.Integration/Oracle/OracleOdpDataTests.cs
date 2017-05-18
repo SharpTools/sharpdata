@@ -1,16 +1,15 @@
 using System;
+using SharpData.Databases;
+using SharpData.Schema;
+using SharpData.Tests.Integration.Data;
 using Xunit;
-using Sharp.Data;
-using Sharp.Data.Databases;
-using Sharp.Data.Schema;
-using Sharp.Tests.Databases.Data;
 
-namespace Sharp.Tests.Databases.Oracle {
+namespace SharpData.Tests.Integration.Oracle {
 	
 	public class OracleOdpDataTests : DataClientDataTests {
 
-	    protected override string GetDataProviderName() {
-	        return DataProviderNames.OracleOdp;
+	    protected override DbProviderType GetDataProviderName() {
+	        return DbProviderType.OracleOdp;
 	    }
 
         public override void Can_insert_dates_and_booleans() {

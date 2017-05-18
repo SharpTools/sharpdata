@@ -1,6 +1,6 @@
-using Sharp.Data.Schema;
+using SharpData.Schema;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class AddColumn : DataClientAction, IAddColumnToTable {
         private Column _column;
 

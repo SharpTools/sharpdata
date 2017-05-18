@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sharp.Data.Databases.SqlServer {
+namespace SharpData.Databases.SqlServer {
 	public class SqlServerDataClient : DataClient {
         public SqlServerDataClient(IDatabase database, Dialect dialect)
             : base(database, dialect) {

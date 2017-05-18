@@ -1,8 +1,8 @@
 using System;
-using Sharp.Data.Schema;
+using SharpData.Schema;
 using Sharp.Util;
 
-namespace Sharp.Data.Databases.PostgreSql {
+namespace SharpData.Databases.PostgreSql {
     public class PostgreSqlConstraintsDialect {
         public string GetForeignKeySql(string fkName, string table, string column, string referencingTable, string referencingColumn, OnDelete onDelete) {
             string onDeleteSql;

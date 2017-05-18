@@ -1,11 +1,10 @@
 ﻿using System.Data.SQLite;
 using System.IO;
-using Sharp.Data;
-using Sharp.Data.Databases;
-using Sharp.Tests.Databases.Data;
+using SharpData.Databases;
+using SharpData.Tests.Integration.Data;
 using Xunit;
 
-namespace Sharp.Tests.Databases.SQLite {
+namespace SharpData.Tests.Integration.SQLite {
     public class SqLiteDataTests : DataClientDataTests {
         public SqLiteDataTests() {
             var fileName = "hot.db3";
@@ -15,8 +14,8 @@ namespace Sharp.Tests.Databases.SQLite {
             SQLiteConnection.CreateFile(fileName);
         }
 
-        protected override string GetDataProviderName() {
-            return DataProviderNames.SqLite;
+        protected override DbProviderType GetDataProviderName() {
+            return DbProviderType.SqLite;
         }
         
         [Fact]

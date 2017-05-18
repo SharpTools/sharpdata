@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Data;
 using System.Text;
-using Sharp.Data.Log;
+using SharpData.Log;
 using System.Data.Common;
 
-namespace Sharp.Data {
+namespace SharpData {
     public abstract class DefaultDatabase {
-        private static readonly ISharpLogger Log = LogManager.GetLogger("Sharp.Data.Database");
+        private static readonly ISharpLogger Log = LogManager.GetLogger("SharpData.Database");
 
         public IDataProvider Provider { get; protected set; }
         public string ConnectionString { get; protected set; }

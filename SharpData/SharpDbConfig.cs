@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sharp.Data {
+namespace SharpData {
     public class SharpDbConfig {
         public string DbProviderName { get; set; }
         public IDataProvider DataProvider { get; set; }

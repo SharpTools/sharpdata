@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace Sharp.Data {
+namespace SharpData {
 	public class DataReaderToResultSetMapper {
 
 		public static ResultSet Map(IDataReader dr) {

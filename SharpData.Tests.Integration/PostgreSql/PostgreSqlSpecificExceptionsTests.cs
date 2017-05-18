@@ -1,11 +1,10 @@
-﻿using Xunit;
-using Sharp.Data.Databases;
-using Sharp.Tests.Databases.Data;
+﻿using SharpData.Databases;
+using SharpData.Tests.Integration.Data;
 
-namespace Sharp.Tests.Databases.PostgreSql {
+namespace SharpData.Tests.Integration.PostgreSql {
     public class PostgreSqlSpecificExceptionsTests : SpecificExceptionsTests {
         public PostgreSqlSpecificExceptionsTests() {
-            _dataClient = DBBuilder.GetDataClient(DataProviderNames.PostgreSql);
+            _dataClient = DBBuilder.GetDataClient(DbProviderType.PostgreSql);
             _database = _dataClient.Database;
         } 
     }

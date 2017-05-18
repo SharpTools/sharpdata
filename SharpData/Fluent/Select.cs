@@ -1,8 +1,8 @@
 using System;
-using Sharp.Data.Filters;
-using Sharp.Data.Schema;
+using SharpData.Filters;
+using SharpData.Schema;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class Select : DataClientAction {
 
         public string[] Columns { get; set; }

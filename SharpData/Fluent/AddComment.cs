@@ -1,4 +1,4 @@
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class AddComment : DataClientAction, IAddCommentColumnOrTable, IAddCommentToColumn {
         public string Comment { get; set; }
         public string ColumnName { get; set; }

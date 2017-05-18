@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Sharp.Data.Util {
+namespace SharpData.Util {
     public class ReflectionHelper {
         public static BindingFlags NoRestrictions = BindingFlags.Public |
                                                     BindingFlags.NonPublic |

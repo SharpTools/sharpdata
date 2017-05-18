@@ -1,6 +1,6 @@
-using Sharp.Data.Schema;
+using SharpData.Schema;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class FluentAdd : ReversibleFluentActions, IFluentAdd {
     
         private IDataClient _dataClient;

@@ -1,4 +1,4 @@
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class RemoveComment : DataClientAction, IRemoveCommentFromColumnOrTable, IRemoveCommentFromColumn {
         public string ColumnName { get; set; }
 

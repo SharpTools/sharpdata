@@ -1,4 +1,4 @@
-namespace Sharp.Data.Query {
+namespace SharpData.Query {
     public enum CompareOperator {
         Equals,
         GreaterThan,

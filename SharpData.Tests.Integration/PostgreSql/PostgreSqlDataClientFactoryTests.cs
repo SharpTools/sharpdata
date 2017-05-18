@@ -1,13 +1,13 @@
 ﻿using System;
-using Sharp.Data.Databases;
-using Sharp.Data.Databases.PostgreSql;
-using Sharp.Tests.Databases.Data;
+using SharpData.Databases;
+using SharpData.Databases.PostgreSql;
+using SharpData.Tests.Integration.Data;
 
-namespace Sharp.Tests.Databases.PostgreSql {
+namespace SharpData.Tests.Integration.PostgreSql {
     public class PostgreSqlDataClientFactoryTests : DataClientFactoryTests {
         
-        public override string GetDatabaseType() {
-            return DataProviderNames.PostgreSql;
+        public override DbProviderType GetDatabaseType() {
+            return DbProviderType.PostgreSql;
         }
 
         public override Type GetDataProviderType() {

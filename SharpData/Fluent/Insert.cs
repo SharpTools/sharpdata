@@ -1,5 +1,5 @@
 using System;
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class Insert : DataClientAction {
         
         public string[] Columns { get; set; }

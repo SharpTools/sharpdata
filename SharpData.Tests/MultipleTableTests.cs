@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Moq;
 using Xunit;
-using Sharp.Data;
-using Sharp.Data.Databases;
-using Sharp.Data.Filters;
+using SharpData;
+using SharpData.Databases;
+using SharpData.Filters;
 
 namespace Sharp.Tests.Data {
    

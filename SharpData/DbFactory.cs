@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Common;
 
-namespace Sharp.Data {
+namespace SharpData {
     public abstract class DbFactory {
         public string ConnectionString { get; set; }
         public DbProviderFactory DbProviderFactory { get; set; }

@@ -1,4 +1,4 @@
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public interface IRemoveFromTable {
         void FromTable(string tableName);
     }

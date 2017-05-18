@@ -1,6 +1,6 @@
 using System;
 
-namespace Sharp.Data {
+namespace SharpData {
     public class DatabaseException : Exception {
 
         public string SQL { get; set; }

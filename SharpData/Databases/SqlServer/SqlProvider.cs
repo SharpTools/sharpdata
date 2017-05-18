@@ -1,15 +1,14 @@
 using System.Data.Common;
-using Sharp.Data.Databases;
-using Sharp.Data.Exceptions;
 using System.Reflection;
-using Sharp.Data.Util;
+using SharpData.Exceptions;
+using SharpData.Util;
 
-namespace Sharp.Data.Providers {
+namespace SharpData.Databases.SqlServer {
     public class SqlProvider : DataProvider {
         public SqlProvider(DbProviderFactory dbProviderFactory) : base(dbProviderFactory) {
         }
 
-        public override string Name => DataProviderNames.SqlServer;
+        public override DbProviderType Name => DbProviderType.SqlServer;
 
         public override DatabaseKind DatabaseKind => DatabaseKind.SqlServer;
 

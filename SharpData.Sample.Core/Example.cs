@@ -1,8 +1,8 @@
-﻿using Sharp.Data;
-using Sharp.Data.Filters;
-using Sharp.Data.Schema;
+﻿using SharpData;
+using SharpData.Filters;
+using SharpData.Schema;
 using System;
-using static Sharp.Data.Schema.Column;
+using static SharpData.Schema.Column;
 
 namespace SharpData.Sample {
     public class Example {

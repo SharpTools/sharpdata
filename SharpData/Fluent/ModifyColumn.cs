@@ -1,6 +1,6 @@
-using Sharp.Data.Schema;
+using SharpData.Schema;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class ModifyColumn : DataClientAction {
         private string _columnName;
         private FluentColumn _columnDefinition;

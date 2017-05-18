@@ -1,7 +1,7 @@
 ﻿using Moq;
-using Sharp.Data;
-using Sharp.Data.Databases;
-using Sharp.Data.Filters;
+using SharpData;
+using SharpData.Databases;
+using SharpData.Filters;
 using Xunit;
 
 namespace Sharp.Tests.Data {

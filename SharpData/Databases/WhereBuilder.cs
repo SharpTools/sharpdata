@@ -1,8 +1,8 @@
 ﻿using System.Text;
-using Sharp.Data.Filters;
-using Sharp.Data.Query;
+using SharpData.Filters;
+using SharpData.Query;
 
-namespace Sharp.Data.Databases {
+namespace SharpData.Databases {
 	public class WhereBuilder {
 
 		private StringBuilder _builder = new StringBuilder();

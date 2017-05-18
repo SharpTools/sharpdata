@@ -1,7 +1,7 @@
 using System;
 using System.Data;
 
-namespace Sharp.Data {
+namespace SharpData {
     public interface IDatabase : IDisposable {
         IDataProvider Provider { get; }
         string ConnectionString { get; }

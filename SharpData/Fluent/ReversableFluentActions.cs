@@ -1,6 +1,6 @@
 using System;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class ReversibleFluentActions {
         public event Action<DataClientAction> OnAction;
 

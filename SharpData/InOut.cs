@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 
-namespace Sharp.Data {
+namespace SharpData {
 	[DebuggerDisplay("[{Name}][{Value}]")]
     public class InOut {
         public string Name { get; set; }

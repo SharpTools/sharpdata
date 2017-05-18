@@ -1,13 +1,12 @@
 using System;
-using Sharp.Data.Databases;
-using Sharp.Data.Databases.SqLite;
-using Sharp.Data.Providers;
-using Sharp.Tests.Databases.Data;
+using SharpData.Databases;
+using SharpData.Databases.SqLite;
+using SharpData.Tests.Integration.Data;
 
-namespace Sharp.Tests.Databases.SQLite {
+namespace SharpData.Tests.Integration.SQLite {
     public class SqLiteDataClientFactoryTests : DataClientFactoryTests {
-        public override string GetDatabaseType() {
-            return DataProviderNames.SqLite;
+        public override DbProviderType GetDatabaseType() {
+            return DbProviderType.SqLite;
         }
 
         public override Type GetDataProviderType() {

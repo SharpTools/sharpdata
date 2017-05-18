@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
-using Sharp.Data.Filters;
-using Sharp.Data.Query;
+using SharpData.Filters;
+using SharpData.Query;
 
 namespace Sharp.Tests.Data.Filters {
 	

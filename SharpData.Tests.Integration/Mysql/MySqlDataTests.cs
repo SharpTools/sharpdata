@@ -1,13 +1,12 @@
-﻿using System;
-using Sharp.Data.Databases;
-using Sharp.Data.Schema;
-using Sharp.Tests.Databases.Data;
+﻿using SharpData.Databases;
+using SharpData.Schema;
+using SharpData.Tests.Integration.Data;
 using Xunit;
 
-namespace Sharp.Tests.Databases.Mysql {
+namespace SharpData.Tests.Integration.Mysql {
     public class MySqlDataTests : DataClientDataTests {
-        protected override string GetDataProviderName() {
-            return DataProviderNames.MySql;
+        protected override DbProviderType GetDataProviderName() {
+            return DbProviderType.MySql;
         }
 
         [Fact(Skip = "Not implemented yet. Pull requests welcome!")]

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Sharp.Data.Log {
+namespace SharpData.Log {
     public class NLogLoggerFactory : ISharpLoggerFactory {
         private static readonly Type LogManagerType = Type.GetType("NLog.LogManager, NLog");
         private static readonly Func<string, object> GetLoggerByNameDelegate;

@@ -1,6 +1,6 @@
-using Sharp.Data;
+using SharpData;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class RemoveTable : DataClientAction {
         public RemoveTable(IDataClient dataClient) : base(dataClient) {}
 

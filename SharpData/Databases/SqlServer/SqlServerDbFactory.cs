@@ -1,7 +1,6 @@
-﻿using Sharp.Data.Providers;
-using System.Data.Common;
+﻿using System.Data.Common;
 
-namespace Sharp.Data.Databases.SqlServer {
+namespace SharpData.Databases.SqlServer {
     public class SqlServerDbFactory : DbFactory {
         public SqlServerDbFactory(DbProviderFactory dbProviderFactory, string connectionString)
             : base(dbProviderFactory, connectionString) {

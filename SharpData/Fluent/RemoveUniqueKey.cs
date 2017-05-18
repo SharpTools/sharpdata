@@ -1,6 +1,6 @@
-using Sharp.Data;
+using SharpData;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class RemoveUniqueKey : RemoveItemFromTable {
         public RemoveUniqueKey(IDataClient dataClient, string uniqueKeyName) : base(dataClient) {
             ItemName = uniqueKeyName;

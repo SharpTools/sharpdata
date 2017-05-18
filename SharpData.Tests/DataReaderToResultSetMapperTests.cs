@@ -1,7 +1,7 @@
 ﻿using System.Data.Common;
 using Moq;
 using Xunit;
-using Sharp.Data;
+using SharpData;
 using SharpData.Tests;
 
 namespace Sharp.Tests.Data {

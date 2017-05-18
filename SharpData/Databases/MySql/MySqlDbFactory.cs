@@ -1,7 +1,6 @@
-﻿using Sharp.Data.Providers;
-using System.Data.Common;
+﻿using System.Data.Common;
 
-namespace Sharp.Data.Databases.MySql {
+namespace SharpData.Databases.MySql {
     public class MySqlDbFactory : DbFactory {
         public MySqlDbFactory(DbProviderFactory dbProviderFactory, string connectionString)
             : base(dbProviderFactory, connectionString) {

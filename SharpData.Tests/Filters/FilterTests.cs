@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
-using Sharp.Data.Filters;
+using SharpData.Filters;
 using Xunit;
-using Sharp.Data.Query;
-using FilterParameter = Sharp.Data.Filters.FilterParameter;
+using SharpData.Query;
+using FilterParameter = SharpData.Filters.FilterParameter;
 
 namespace Sharp.Tests.Data.Filters {
 

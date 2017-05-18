@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Text;
-using Sharp.Data.Schema;
+using SharpData.Schema;
 
-namespace Sharp.Data.Databases.Oracle {
+namespace SharpData.Databases.Oracle {
     public class OracleDialect : Dialect {
         public static string SequencePrefix = "SEQ_";
         public static string TriggerPrefix = "TR_INC_";

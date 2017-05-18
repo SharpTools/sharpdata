@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Sharp.Data {
+namespace SharpData {
     public class TableRow : List<object> {
 
         protected ResultSet _table;

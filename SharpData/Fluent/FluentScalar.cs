@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class FluentScalar<T> {
 
         //private IDataClient _client;

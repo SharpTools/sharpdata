@@ -3,36 +3,34 @@ using System.Data.SqlClient;
 using System.Data.SQLite;
 using MySql.Data.MySqlClient;
 using Npgsql;
-using Oracle.ManagedDataAccess.Client;
-using Sharp.Data;
-using Sharp.Data.Databases;
-using SharpData.Tests.Integration;
+using SharpData.Databases;
+using OracleClientFactory = Oracle.ManagedDataAccess.Client.OracleClientFactory;
 using OracleDataAccess = Oracle.DataAccess.Client;
 
-namespace Sharp.Tests.Databases {
+namespace SharpData.Tests.Integration {
     public static class DBBuilder {
-        private static Dictionary<string, SharpFactory> _factories = new Dictionary<string, SharpFactory>();
+        private static Dictionary<DbProviderType, SharpFactory> _factories = new Dictionary<DbProviderType, SharpFactory>();
 
         static DBBuilder() {
-            _factories.Add(DataProviderNames.SqlServer,
+            _factories.Add(DbProviderType.SqlServer,
                 new SharpFactory(SqlClientFactory.Instance, ConnectionStrings.SqlServer));
-            _factories.Add(DataProviderNames.MySql,
+            _factories.Add(DbProviderType.MySql,
                 new SharpFactory(new MySqlClientFactory(), ConnectionStrings.Mysql));
-            _factories.Add(DataProviderNames.OracleManaged,
+            _factories.Add(DbProviderType.OracleManaged,
                 new SharpFactory(new OracleClientFactory(), ConnectionStrings.Oracle));
-            _factories.Add(DataProviderNames.OracleOdp,
+            _factories.Add(DbProviderType.OracleOdp,
                 new SharpFactory(new OracleDataAccess.OracleClientFactory(), ConnectionStrings.Oracle));
-            _factories.Add(DataProviderNames.PostgreSql,
+            _factories.Add(DbProviderType.PostgreSql,
                 new SharpFactory(NpgsqlFactory.Instance, ConnectionStrings.Postgre));
-            _factories.Add(DataProviderNames.SqLite,
+            _factories.Add(DbProviderType.SqLite,
                 new SharpFactory(SQLiteFactory.Instance, ConnectionStrings.Sqlite));
         }
 
-        public static IDataClient GetDataClient(string databaseProvider) {
+        public static IDataClient GetDataClient(DbProviderType databaseProvider) {
             return _factories[databaseProvider].CreateDataClient();
         }
 
-        public static string GetConnectionString(string databaseProvider) {
+        public static string GetConnectionString(DbProviderType databaseProvider) {
             return _factories[databaseProvider].ConnectionString;
         }
     }

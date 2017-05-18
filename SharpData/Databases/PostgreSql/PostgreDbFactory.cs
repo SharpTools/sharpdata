@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace Sharp.Data.Databases.PostgreSql {
+namespace SharpData.Databases.PostgreSql {
     public class PostgreDbFactory : DbFactory {
         public PostgreDbFactory(DbProviderFactory dbProviderFactory, string connectionString) : 
             base(dbProviderFactory, connectionString) { }

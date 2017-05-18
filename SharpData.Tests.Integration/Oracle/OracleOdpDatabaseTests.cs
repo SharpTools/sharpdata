@@ -1,10 +1,9 @@
 ﻿using System.Reflection;
-using Xunit;
-using Sharp.Data.Databases;
-using Sharp.Data.Databases.Oracle;
-using Sharp.Data.Util;
+using SharpData.Databases;
+using SharpData.Databases.Oracle;
+using SharpData.Util;
 
-namespace Sharp.Tests.Databases.Oracle {
+namespace SharpData.Tests.Integration.Oracle {
    
     public class OracleOdpDatabaseTests : OracleManagedDatabaseTests {
 
@@ -12,8 +11,8 @@ namespace Sharp.Tests.Databases.Oracle {
             
         }
 
-        protected override string GetDataProviderName() {
-            return DataProviderNames.OracleOdp;
+        protected override DbProviderType GetDataProviderName() {
+            return DbProviderType.OracleOdp;
         }
 
         public override void Dispose() {

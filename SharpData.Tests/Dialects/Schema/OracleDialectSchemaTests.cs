@@ -1,7 +1,7 @@
 using System;
 using Xunit;
-using Sharp.Data;
-using Sharp.Data.Databases.Oracle;
+using SharpData;
+using SharpData.Databases.Oracle;
 
 namespace Sharp.Tests.Databases.Oracle {
 	

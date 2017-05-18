@@ -1,10 +1,9 @@
 ﻿using System;
+using SharpData.Databases;
+using SharpData.Schema;
 using Xunit;
-using Sharp.Data;
-using Sharp.Data.Schema;
-using SharpData.Tests.Integration;
 
-namespace Sharp.Tests.Databases.Data {
+namespace SharpData.Tests.Integration.Data {
 
     public abstract class DatabaseTests : IDisposable {
         private IDataClient _dataClient;
@@ -14,7 +13,7 @@ namespace Sharp.Tests.Databases.Data {
         protected string TableFoo = "foo";
 
         protected virtual string GetParameterPrefix() => ":";
-        protected abstract string GetDataProviderName();
+        protected abstract DbProviderType GetDataProviderName();
 
         [Fact]
         public void Can_query_with_string_filter() {

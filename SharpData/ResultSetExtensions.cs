@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Sharp.Data.Util;
+using SharpData.Util;
 
-namespace Sharp.Data {
+namespace SharpData {
     public static class ResultSetExtensions {
         public static List<T> Map<T>(this ResultSet res) where T : new() {
             var list = new List<T>();

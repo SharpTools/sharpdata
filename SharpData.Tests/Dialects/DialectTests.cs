@@ -1,5 +1,5 @@
 ﻿using Xunit;
-using Sharp.Data;
+using SharpData;
 
 namespace Sharp.Tests.Data.Databases {
     public abstract class DialectTests {

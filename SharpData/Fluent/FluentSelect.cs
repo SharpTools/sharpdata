@@ -1,7 +1,7 @@
-using Sharp.Data.Filters;
-using Sharp.Data.Schema;
+using SharpData.Filters;
+using SharpData.Schema;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
 	public class FluentSelect : IFluentSelect, IFluentSelectTable, IFluentSelectFilter, IFluentSelectOrderBy, IFluentSelectToResultSet {
 		private Select _select;
 

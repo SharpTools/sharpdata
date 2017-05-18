@@ -1,7 +1,7 @@
 ﻿using System;
-using Sharp.Data.Filters;
+using SharpData.Filters;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
 	public class FluentCount : IFluentCount, IFluentCountFilter {
 
 		private Count _count;

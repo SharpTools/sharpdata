@@ -1,13 +1,12 @@
 using System;
-using Sharp.Data.Databases;
-using Sharp.Data.Databases.MySql;
-using Sharp.Data.Providers;
-using Sharp.Tests.Databases.Data;
+using SharpData.Databases;
+using SharpData.Databases.MySql;
+using SharpData.Tests.Integration.Data;
 
-namespace Sharp.Tests.Databases.Mysql {
+namespace SharpData.Tests.Integration.Mysql {
     public class MySqlDataClientFactoryTests : DataClientFactoryTests {
-        public override string GetDatabaseType() {
-            return DataProviderNames.MySql;
+        public override DbProviderType GetDatabaseType() {
+            return DbProviderType.MySql;
         }
 
         public override Type GetDataProviderType() {

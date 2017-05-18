@@ -1,6 +1,6 @@
 using System;
 using Xunit;
-using Sharp.Data.Databases.SqLite;
+using SharpData.Databases.SqLite;
 
 namespace Sharp.Tests.Databases.SQLite {
 	

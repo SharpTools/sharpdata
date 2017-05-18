@@ -1,9 +1,9 @@
 using System;
-using Sharp.Data.Filters;
-using Sharp.Data.Fluent;
-using Sharp.Data.Schema;
+using SharpData.Filters;
+using SharpData.Fluent;
+using SharpData.Schema;
 
-namespace Sharp.Data {
+namespace SharpData {
     public class FakeDataClient : IDataClient {
         public void Dispose() {}
 

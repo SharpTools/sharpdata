@@ -1,11 +1,9 @@
 using System;
+using SharpData.Databases;
 using Xunit;
-using Sharp.Data;
 
-namespace Sharp.Tests.Databases.Data {
+namespace SharpData.Tests.Integration.Data {
     public abstract class DataClientFactoryTests {
-	    private const string ConnectionString = "connectionString";
-
         public IDataClient CreateDataClient() {
             return DBBuilder.GetDataClient(GetDatabaseType());
         }
@@ -24,7 +22,7 @@ namespace Sharp.Tests.Databases.Data {
             Assert.True(client.Dialect.GetType() == GetDialectType());
         }
 
-        public abstract string GetDatabaseType();
+        public abstract DbProviderType GetDatabaseType();
         public abstract Type GetDataProviderType();
         public abstract Type GetDataClientType();
         public abstract Type GetDialectType();

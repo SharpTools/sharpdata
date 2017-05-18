@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Sharp.Data.Util;
+using SharpData.Util;
 using Xunit;
 
 namespace Sharp.Tests.Data.Util {

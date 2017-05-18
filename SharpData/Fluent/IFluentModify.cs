@@ -1,4 +1,4 @@
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public interface IFluentModify {
         ModifyColumn Column(string columnName);
     }

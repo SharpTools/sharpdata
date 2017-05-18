@@ -1,7 +1,7 @@
 using System;
-using Sharp.Data.Log;
+using SharpData.Log;
 
-namespace Sharp.Data {
+namespace SharpData {
     
     public class DataTypeNotAvailableException : Exception {
         public DataTypeNotAvailableException(string message) : base(message) { }

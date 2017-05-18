@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Sharp.Data.Filters;
-using Sharp.Data.Schema;
+using SharpData.Filters;
+using SharpData.Schema;
 
-namespace Sharp.Data.Databases {
+namespace SharpData.Databases {
 	public class SelectBuilder {
 		private Dialect _dialect;
 		private string[] _tables;

@@ -1,6 +1,6 @@
-﻿using Sharp.Data.Query;
+﻿using SharpData.Query;
 
-namespace Sharp.Data.Filters {
+namespace SharpData.Filters {
 	public class FilterLogic : Filter {
 		public LogicOperator LogicOperator { get; set; }
 	}

@@ -2,9 +2,9 @@ using System;
 using System.Data;
 using System.Globalization;
 using System.Text;
-using Sharp.Data.Schema;
+using SharpData.Schema;
 
-namespace Sharp.Data.Databases.PostgreSql {
+namespace SharpData.Databases.PostgreSql {
     internal class PostgreSqlColumnDialect {
         private readonly string _wordNull;
         private readonly string _wordNotNull;

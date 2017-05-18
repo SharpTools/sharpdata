@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using SharpData.Filters;
+using SharpData.Schema;
 using Xunit;
-using Sharp.Data;
-using Sharp.Data.Filters;
-using Sharp.Data.Schema;
 
-namespace Sharp.Tests.Databases.Data {
+namespace SharpData.Tests.Integration.Data {
 
     public abstract class DataClientDataTests : DataClientTests {
 
@@ -26,7 +24,7 @@ namespace Sharp.Tests.Databases.Data {
         [Fact]
         public virtual void Can_insert_dates_and_booleans() {
             DataClient.AddTable("footable",
-                                 Column.AutoIncrement("id"),
+                                 Column.AutoIncrement("id").AsPrimaryKey(),
                                  Column.Date("colDate"),
                                  Column.Boolean("colBool"));
             var now = new DateTime(2017,1,1);
@@ -54,7 +52,7 @@ namespace Sharp.Tests.Databases.Data {
         [Fact]
         public virtual void Can_insert_with_only_null() {
             DataClient.AddTable("footable",
-                                 Column.AutoIncrement("id"),
+                                 Column.AutoIncrement("id").AsPrimaryKey(),
                                  Column.String("name")
             );
 
@@ -66,7 +64,7 @@ namespace Sharp.Tests.Databases.Data {
         [Fact]
         public virtual void Can_insert_with_values_plus_null() {
             DataClient.AddTable("footable",
-                                 Column.AutoIncrement("id"),
+                                 Column.AutoIncrement("id").AsPrimaryKey(),
                                  Column.String("name"),
                                  Column.String("surname")
             );

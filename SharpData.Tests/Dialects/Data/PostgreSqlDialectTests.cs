@@ -1,6 +1,6 @@
 ﻿using System;
 using Xunit;
-using Sharp.Data.Databases.PostgreSql;
+using SharpData.Databases.PostgreSql;
 
 namespace Sharp.Tests.Databases.PostgreSql {
     public class PostgreSqlDialectTests : DialectDataTests {

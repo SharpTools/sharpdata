@@ -1,6 +1,6 @@
 using System;
 
-namespace Sharp.Data.Log {
+namespace SharpData.Log {
     public interface ISharpLogger {
         bool IsErrorEnabled { get; }
         bool IsFatalEnabled { get; }

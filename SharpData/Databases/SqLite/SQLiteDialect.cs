@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Text;
-using Sharp.Data.Util;
-using Sharp.Data.Schema;
+using SharpData.Util;
+using SharpData.Schema;
 using Sharp.Util;
 
-namespace Sharp.Data.Databases.SqLite {
+namespace SharpData.Databases.SqLite {
 
     public class SqLiteDialect : Dialect {
 

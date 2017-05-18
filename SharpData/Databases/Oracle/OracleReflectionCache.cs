@@ -1,6 +1,6 @@
 using System.Reflection;
 
-namespace Sharp.Data.Databases.Oracle {
+namespace SharpData.Databases.Oracle {
     public class OracleReflectionCache {
         public bool IsCached { get; set; }
         public PropertyInfo PropParameterDbType { get; set; }

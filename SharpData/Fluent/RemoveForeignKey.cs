@@ -1,6 +1,6 @@
-using Sharp.Data;
+using SharpData;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class RemoveForeignKey : RemoveItemFromTable {
 
         public RemoveForeignKey(IDataClient dataClient, string foreignKeyName) : base(dataClient) {

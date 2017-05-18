@@ -1,6 +1,6 @@
-using Sharp.Data;
+using SharpData;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public class AddPrimaryKey : DataClientAction, IAddPrimaryKeyOnColumns, IAddPrimaryKeyOfTable {
         
         public string PrimaryKeyName { get; set; }

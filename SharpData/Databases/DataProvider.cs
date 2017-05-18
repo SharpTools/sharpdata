@@ -2,10 +2,10 @@
 using System.Data;
 using System.Data.Common;
 
-namespace Sharp.Data.Databases {
+namespace SharpData.Databases {
     public abstract class DataProvider : IDataProvider {
         protected DbProviderFactory DbProviderFactory { get; }
-        public abstract string Name { get; }
+        public abstract DbProviderType Name { get; }
         public abstract DatabaseKind DatabaseKind { get; }
 
         protected DataProvider(DbProviderFactory dbProviderFactory) {

@@ -1,4 +1,4 @@
-﻿namespace Sharp.Data.Schema {
+﻿namespace SharpData.Schema {
 	public class OrderBy {
 		public string ColumnName { get; set; }
 		public OrderByDirection Direction { get; set; }

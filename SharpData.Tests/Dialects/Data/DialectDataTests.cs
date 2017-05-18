@@ -1,6 +1,6 @@
 using System;
-using Sharp.Data;
-using Sharp.Data.Schema;
+using SharpData;
+using SharpData.Schema;
 using Sharp.Tests.Data.Databases;
 using Xunit;
 

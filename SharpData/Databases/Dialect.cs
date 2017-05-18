@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using Sharp.Data.Databases;
-using Sharp.Data.Filters;
-using Sharp.Data.Query;
-using Sharp.Data.Schema;
+using SharpData.Databases;
+using SharpData.Filters;
+using SharpData.Query;
+using SharpData.Schema;
 
-namespace Sharp.Data {
+namespace SharpData {
     public abstract class Dialect {
         public virtual string WordNull => "NULL";
 

@@ -1,10 +1,10 @@
-﻿using Sharp.Data.Databases;
-using Sharp.Tests.Databases.Data;
+﻿using SharpData.Databases;
+using SharpData.Tests.Integration.Data;
 
-namespace Sharp.Tests.Databases.SqlServer {
+namespace SharpData.Tests.Integration.SqlServer {
     public class SqlServerSchemaTests : DataClientSchemaTests {
-        protected override string GetDataProviderName() {
-            return DataProviderNames.SqlServer;
+        protected override DbProviderType GetDataProviderName() {
+            return DbProviderType.SqlServer;
         }
     }
 }

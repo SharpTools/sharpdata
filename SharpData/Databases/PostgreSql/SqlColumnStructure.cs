@@ -1,4 +1,4 @@
-namespace Sharp.Data.Databases.PostgreSql {
+namespace SharpData.Databases.PostgreSql {
     internal class SqlColumnStructure {
         public string Type { get; set; }
         public string Nullable { get; set; }

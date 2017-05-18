@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
+using SharpData.Schema;
 using Xunit;
-using Sharp.Data;
-using Sharp.Data.Schema;
 
-namespace Sharp.Tests.Databases.Data {
+namespace SharpData.Tests.Integration.Data {
 
 	public abstract class DataClientSchemaTests : DataClientTests {
 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data;
-using Sharp.Data.Schema;
+using SharpData.Schema;
 
-namespace Sharp.Data.Databases.PostgreSql {
+namespace SharpData.Databases.PostgreSql {
     public sealed class PostgreSqlDialect : Dialect {
         private readonly PostgreSqlTableDialect _postgreSqlTableDialect;
         private readonly PostgreSqlConstraintsDialect _postgreSqlConstraintsDialect;

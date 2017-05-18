@@ -1,10 +1,9 @@
 using System;
+using SharpData.Databases;
+using SharpData.Schema;
 using Xunit;
-using Sharp.Data;
-using Sharp.Data.Filters;
-using Sharp.Data.Schema;
 
-namespace Sharp.Tests.Databases.Data {
+namespace SharpData.Tests.Integration.Data {
 
     public abstract class DataClientTests : IDisposable {
         protected string TableFoo = "foo";
@@ -12,7 +11,7 @@ namespace Sharp.Tests.Databases.Data {
 
         protected IDataClient DataClient => _dataClient ?? (_dataClient = DBBuilder.GetDataClient(GetDataProviderName()));
 
-        protected abstract string GetDataProviderName();
+        protected abstract DbProviderType GetDataProviderName();
 
         protected DataClientTests() {
             CleanTables();

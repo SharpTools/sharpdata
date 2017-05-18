@@ -1,4 +1,4 @@
-﻿namespace Sharp.Data.Databases {
+﻿namespace SharpData.Databases {
     public enum DatabaseKind {
         Oracle,
         SqlServer,

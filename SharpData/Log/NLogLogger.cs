@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 
-namespace Sharp.Data.Log {
+namespace SharpData.Log {
     public class NLogLogger : ISharpLogger {
         private object _logger;
 

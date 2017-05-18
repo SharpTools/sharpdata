@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Sharp.Data.Schema;
+using SharpData.Schema;
 
-namespace Sharp.Data.Databases.PostgreSql {
+namespace SharpData.Databases.PostgreSql {
     public class PostgreSqlTableDialect {
         public static string SequencePrefix = "SEQ_";
         public static string PrimaryKeyPrefix = "PK_";

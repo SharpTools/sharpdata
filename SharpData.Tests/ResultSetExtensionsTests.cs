@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Xunit;
-using Sharp.Data;
+using SharpData;
 
 namespace Sharp.Tests.Data {
     public class ResultSetExtensionsTests {

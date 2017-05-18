@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
-using Sharp.Data.Databases;
-using Sharp.Data.Filters;
-using Sharp.Data.Fluent;
-using Sharp.Data.Schema;
+using SharpData.Databases;
+using SharpData.Filters;
+using SharpData.Fluent;
+using SharpData.Schema;
 
-namespace Sharp.Data {
+namespace SharpData {
     public class DataClient : IDataClient {
         public DataClient(IDatabase database, Dialect dialect) {
             Database = database;

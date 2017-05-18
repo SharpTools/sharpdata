@@ -1,7 +1,7 @@
 ﻿using System;
-using Sharp.Data.Query;
+using SharpData.Query;
 
-namespace Sharp.Data.Filters {
+namespace SharpData.Filters {
 	public static class LogicOperatorToSymbol {
 
 		public static string Get(LogicOperator logicOperator) {

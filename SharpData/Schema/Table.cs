@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Sharp.Data.Schema {
+namespace SharpData.Schema {
     
     public class Table {
         

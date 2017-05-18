@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Sharp.Data.Log {
+namespace SharpData.Log {
     public class Log4NetLogger : ISharpLogger {
         private static readonly Type ILogType = Type.GetType("log4net.ILog, log4net");
         private static readonly Func<object, bool> IsErrorEnabledDelegate;

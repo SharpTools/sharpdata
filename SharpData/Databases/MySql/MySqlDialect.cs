@@ -4,10 +4,10 @@ using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using Sharp.Data.Schema;
+using SharpData.Schema;
 using Sharp.Util;
 
-namespace Sharp.Data.Databases.MySql {
+namespace SharpData.Databases.MySql {
     public class MySqlDialect : Dialect {
         
         public override string ParameterPrefix => "@";

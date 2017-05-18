@@ -1,6 +1,6 @@
-﻿using Sharp.Data.Query;
+﻿using SharpData.Query;
 
-namespace Sharp.Data.Filters {
+namespace SharpData.Filters {
 	public class FilterParameter {
 		public object Value { get; set; }
 		public FilterParameterType FilterParameterType { get; set; }

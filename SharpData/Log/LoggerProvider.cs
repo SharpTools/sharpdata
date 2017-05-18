@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace Sharp.Data.Log {
+namespace SharpData.Log {
     public class LogManager {
         private ISharpLoggerFactory _loggerFactory;
         private static LogManager _instance;

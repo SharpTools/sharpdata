@@ -1,4 +1,4 @@
-﻿namespace Sharp.Data.Schema {
+﻿namespace SharpData.Schema {
 	public enum OrderByDirection {
 		Ascending,
 		Descending

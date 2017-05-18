@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 
-namespace Sharp.Data {
+namespace SharpData {
     public static class GenericDbTypeMap {
 
         private static Dictionary<Type, DbType> _typeMap;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Sharp.Data.Query;
+using SharpData.Query;
 
-namespace Sharp.Data.Filters {
+namespace SharpData.Filters {
 	public class Filter {
 		public object Left { get; set; }
 		public object Right { get; set; }

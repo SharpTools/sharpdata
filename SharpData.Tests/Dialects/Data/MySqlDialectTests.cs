@@ -1,6 +1,6 @@
 using System;
 using Xunit;
-using Sharp.Data.Databases.MySql;
+using SharpData.Databases.MySql;
 
 namespace Sharp.Tests.Databases.Mysql {
    

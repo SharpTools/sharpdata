@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace Sharp.Data.Schema {
+namespace SharpData.Schema {
     public class FluentColumn {
 
         public Column Object { get; protected set; }

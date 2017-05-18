@@ -1,6 +1,6 @@
 ﻿using System.Data.Common;
 
-namespace Sharp.Data {
+namespace SharpData {
     public interface ISharpFactory {
         string ConnectionString { get; }
         DbProviderFactory DbProviderFactory { get; }

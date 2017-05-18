@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Sharp.Data {
+namespace SharpData {
     public static class ExceptionHelper {
 
         public static string GetAllErrors(Exception ex) {

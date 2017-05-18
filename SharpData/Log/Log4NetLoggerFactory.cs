@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 
-namespace Sharp.Data.Log {
+namespace SharpData.Log {
     public class Log4NetLoggerFactory : ISharpLoggerFactory {
         private static readonly Type LogManagerType = System.Type.GetType("log4net.LogManager, log4net");
         private static readonly Func<string, object> GetLoggerByNameDelegate;

@@ -1,6 +1,6 @@
 using System;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
     public abstract class DataClientAction {
 
         public string[] TableNames { get; protected set; }

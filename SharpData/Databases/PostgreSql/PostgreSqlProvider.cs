@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Data;
 using System.Data.Common;
-using Sharp.Data.Exceptions;
+using SharpData.Exceptions;
 
-namespace Sharp.Data.Databases.PostgreSql {
+namespace SharpData.Databases.PostgreSql {
     public class PostgreSqlProvider : DataProvider {
         private const string SavepointId = "PostgreSqlId";
 
         public PostgreSqlProvider(DbProviderFactory dbProviderFactory) : base(dbProviderFactory) { }
-
-        public override string Name {
-            get { return DataProviderNames.PostgreSql; }
-        }
-
-        public override DatabaseKind DatabaseKind {
-            get { return DatabaseKind.PostgreSql; }
-        }
+        public override DbProviderType Name => DbProviderType.PostgreSql;
+        public override DatabaseKind DatabaseKind => DatabaseKind.PostgreSql;
 
         public override DatabaseException CreateSpecificException(Exception exception, string sql) {
             if (exception.Message.Contains("42P01")) {

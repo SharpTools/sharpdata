@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 
-namespace Sharp.Data.Databases.PostgreSql {
+namespace SharpData.Databases.PostgreSql {
     public class PostgreSqlDbTypesDialect {
         public static string GetDbTypeString(DbType type, int precision) {
             switch (type) {

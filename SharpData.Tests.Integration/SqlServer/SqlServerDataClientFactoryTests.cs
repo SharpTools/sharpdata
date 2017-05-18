@@ -1,13 +1,12 @@
 using System;
-using Sharp.Data.Databases;
-using Sharp.Data.Databases.SqlServer;
-using Sharp.Data.Providers;
-using Sharp.Tests.Databases.Data;
+using SharpData.Databases;
+using SharpData.Databases.SqlServer;
+using SharpData.Tests.Integration.Data;
 
-namespace Sharp.Tests.Databases.SqlServer {
+namespace SharpData.Tests.Integration.SqlServer {
     public class SqlServerDataClientFactoryTests : DataClientFactoryTests {
-        public override string GetDatabaseType() {
-            return DataProviderNames.SqlServer;
+        public override DbProviderType GetDatabaseType() {
+            return DbProviderType.SqlServer;
         }
 
         public override Type GetDataProviderType() {

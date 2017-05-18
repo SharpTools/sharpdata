@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sharp.Data.Log {
+namespace SharpData.Log {
     public class NoLoggingInternalLogger : ISharpLogger {
         public bool IsErrorEnabled {
             get { return false; }

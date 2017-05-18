@@ -1,17 +1,15 @@
 using System;
 using System.Data.Common;
 using System.Reflection;
-using Sharp.Data.Databases;
-using Sharp.Data.Exceptions;
-using Sharp.Data.Util;
+using SharpData.Exceptions;
+using SharpData.Util;
 
-namespace Sharp.Data.Providers {
+namespace SharpData.Databases.MySql {
     public class MySqlProvider : DataProvider {
         public MySqlProvider(DbProviderFactory dbProviderFactory) : base(dbProviderFactory) {
         }
 
-        public override string Name => DataProviderNames.MySql;
-
+        public override DbProviderType Name => DbProviderType.MySql;
         public override DatabaseKind DatabaseKind => DatabaseKind.MySql;
 
         public override DatabaseException CreateSpecificException(Exception exception, string sql) {
@@ -21,7 +19,8 @@ namespace Sharp.Data.Providers {
             }
             var number = numberProp.GetValue(exception) as int?;
             if (number == 1075) {
-                return new NotSupportedByDatabaseException("Mysql databases require autoincrement columns to be the primary key", exception, sql);
+                return new NotSupportedByDatabaseException(
+                    "Mysql databases require autoincrement columns to be the primary key", exception, sql);
             }
             return base.CreateSpecificException(exception, sql);
         }

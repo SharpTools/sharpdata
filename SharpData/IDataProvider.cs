@@ -1,11 +1,11 @@
 using System;
 using System.Data;
-using Sharp.Data.Databases;
+using SharpData.Databases;
 using System.Data.Common;
 
-namespace Sharp.Data {
+namespace SharpData {
     public interface IDataProvider {
-        string Name { get; }
+        DbProviderType Name { get; }
         DatabaseKind DatabaseKind { get; }
         IDbConnection GetConnection();
         void ConfigCommand(IDbCommand command, object[] parameters, bool isBulk);

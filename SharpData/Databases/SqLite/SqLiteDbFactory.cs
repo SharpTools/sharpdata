@@ -1,7 +1,6 @@
-﻿using Sharp.Data.Providers;
-using System.Data.Common;
+﻿using System.Data.Common;
 
-namespace Sharp.Data.Databases.SqLite {
+namespace SharpData.Databases.SqLite {
     public class SqLiteDbFactory : DbFactory {
         public SqLiteDbFactory(DbProviderFactory dbProviderFactory, string connectionString)
             : base(dbProviderFactory, connectionString) {

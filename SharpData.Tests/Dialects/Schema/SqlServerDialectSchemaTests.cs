@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Xunit;
-using Sharp.Data.Databases.SqlServer;
+using SharpData.Databases.SqlServer;
 
 namespace Sharp.Tests.Databases.SqlServer {
     public class SqlServerDialectSchemaTests : DialectSchemaTests {

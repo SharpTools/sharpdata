@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Sharp.Data.Log {
+namespace SharpData.Log {
     public class NoLoggingLoggerFactory : ISharpLoggerFactory {
         private static readonly ISharpLogger Nologging = new NoLoggingInternalLogger();
         public ISharpLogger LoggerFor(string keyName) {

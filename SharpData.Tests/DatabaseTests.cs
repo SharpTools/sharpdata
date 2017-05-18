@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.Data.Common;
 using Moq;
-using Sharp.Data;
+using SharpData;
 using Xunit;
 
 namespace Sharp.Tests.Data {

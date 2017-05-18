@@ -1,10 +1,10 @@
-﻿using Sharp.Data.Databases;
-using Sharp.Tests.Databases.Data;
+﻿using SharpData.Databases;
+using SharpData.Tests.Integration.Data;
 
-namespace Sharp.Tests.Databases.SqlServer {
+namespace SharpData.Tests.Integration.SqlServer {
     public class SqlServerSpecifcExceptionsTests : SpecificExceptionsTests {
         public SqlServerSpecifcExceptionsTests() {
-            _dataClient = DBBuilder.GetDataClient(DataProviderNames.SqlServer);
+            _dataClient = DBBuilder.GetDataClient(DbProviderType.SqlServer);
             _database = _dataClient.Database;
         }
     }

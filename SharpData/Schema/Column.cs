@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace Sharp.Data.Schema {
+namespace SharpData.Schema {
     public class Column {
 
         public DbType Type { get; set; }

@@ -1,6 +1,6 @@
-using Sharp.Data.Filters;
+using SharpData.Filters;
 
-namespace Sharp.Data.Fluent {
+namespace SharpData.Fluent {
 
 	public class FluentUpdate : IFluentUpdate, IFluentUpdateColumns, IFluentUpdateValues, IFluentUpdateFilter {
 
