@@ -7,6 +7,7 @@ using SharpData.Databases.PostgreSql;
 using SharpData.Databases.SqLite;
 using SharpData.Databases.SqlServer;
 using System.Data.Common;
+using SharpData.Exceptions;
 
 namespace SharpData {
     public class SharpFactory : ISharpFactory {

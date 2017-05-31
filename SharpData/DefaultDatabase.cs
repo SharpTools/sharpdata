@@ -3,10 +3,11 @@ using System.Data;
 using System.Text;
 using SharpData.Log;
 using System.Data.Common;
+using Microsoft.Extensions.Logging;
 
 namespace SharpData {
     public abstract class DefaultDatabase {
-        private static readonly ISharpLogger Log = LogManager.GetLogger("SharpData.Database");
+        private static ILogger Logger { get; } = SharpDataLogging.CreateLogger<DefaultDatabase>();
 
         public IDataProvider Provider { get; protected set; }
         public string ConnectionString { get; protected set; }
@@ -15,14 +16,14 @@ namespace SharpData {
         protected IDbConnection Connection;
         protected IDbTransaction Transaction;
 
-        public DefaultDatabase(IDataProvider provider, string connectionString) {
+        protected DefaultDatabase(IDataProvider provider, string connectionString) {
             Provider = provider;
             ConnectionString = connectionString;
             LogDatabaseProviderName(provider.ToString());
         }
 
         protected static void LogDatabaseProviderName(string providerName) {
-            Log.Debug("Provider: " + providerName);
+            Logger.LogDebug("Provider: " + providerName);
         }
 
         protected void RetrieveOutParameters(object[] parameters, IDbCommand cmd) {
@@ -87,18 +88,19 @@ namespace SharpData {
         }
 
         protected static void LogCommandCall(string call, IDbCommand cmd) {
-            if (Log.IsDebugEnabled) {
-                var sb = new StringBuilder();
-                sb.Append("Call: ").AppendLine(call);
-                foreach (DbParameter p in cmd.Parameters) {
-                    sb.Append(p.Direction).Append("-> ").Append(p.ParameterName);
-                    if (p.Value != null) {
-                        sb.Append(": ").Append(p.Value);
-                    }
-                    sb.AppendLine();
-                }
-                Log.Debug(sb.ToString());
+            if (!Logger.IsEnabled(LogLevel.Debug)) {
+                return;
             }
+            var sb = new StringBuilder();
+            sb.Append("Call: ").AppendLine(call);
+            foreach (DbParameter p in cmd.Parameters) {
+                sb.Append(p.Direction).Append("-> ").Append(p.ParameterName);
+                if (p.Value != null) {
+                    sb.Append(": ").Append(p.Value);
+                }
+                sb.AppendLine();
+            }
+            Logger.LogDebug(sb.ToString());
         }
 
         protected void PopulateCommandParameters(IDbCommand cmd, object[] parameters, bool isBulk) {
@@ -187,7 +189,7 @@ namespace SharpData {
             try {
                 Connection.Close();
                 Connection.Dispose();
-                Log.Debug("Connection closed");
+                Logger.LogDebug("Connection closed");
             }
             catch { }
             Connection = null;
@@ -198,7 +200,7 @@ namespace SharpData {
                 return;
             }
             Transaction.Commit();
-            Log.Debug("Commit");
+            Logger.LogDebug("Commit");
         }
 
         protected void RollBackTransaction() {
@@ -206,7 +208,7 @@ namespace SharpData {
                 return;
             }
             Transaction.Rollback();
-            Log.Debug("Rollback");
+            Logger.LogDebug("Rollback");
         }
 
         protected int TryExecuteSql(string call, object[] parameters, bool isBulk = false) {
@@ -235,7 +237,7 @@ namespace SharpData {
             Connection.Open();
             Transaction = Connection.BeginTransaction();
 
-            Log.Debug("Connection open");
+            Logger.LogDebug("Connection open");
         }
 
         protected ResultSet ExecuteCatchingErrors(Func<IDataReader> getReader, string call) {

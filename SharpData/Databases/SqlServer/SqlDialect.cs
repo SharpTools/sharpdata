@@ -4,6 +4,7 @@ using System.Data;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
+using SharpData.Exceptions;
 using SharpData.Schema;
 using SharpData.Util;
 

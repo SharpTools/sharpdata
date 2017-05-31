@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using SharpData.Exceptions;
 
 namespace SharpData.Databases.PostgreSql {
     public class PostgreSqlDbTypesDialect {

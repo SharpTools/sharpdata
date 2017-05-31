@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using SharpData.Schema;
 using Sharp.Util;
+using SharpData.Exceptions;
 
 namespace SharpData.Databases.MySql {
     public class MySqlDialect : Dialect {

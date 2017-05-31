@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
 using System.Text;
+using SharpData.Exceptions;
 using SharpData.Schema;
 
 namespace SharpData.Databases.Oracle {

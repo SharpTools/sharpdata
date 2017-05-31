@@ -6,6 +6,7 @@ using System.Text;
 using SharpData.Util;
 using SharpData.Schema;
 using Sharp.Util;
+using SharpData.Exceptions;
 
 namespace SharpData.Databases.SqLite {
 
@@ -70,11 +71,11 @@ namespace SharpData.Databases.SqLite {
 
         public override string GetForeignKeySql(string fkName, string table, string column, string referencingTable,
                                                 string referencingColumn, OnDelete onDelete) {
-			throw new NotSupportedByDialect("ForeignKeys  not supported by SqlLite", "GetForeignKeySql", GetDialectName());
+			throw new NotSupportedByDialectException("ForeignKeys  not supported by SqlLite", "GetForeignKeySql", GetDialectName());
         }
 
         public override string GetDropForeignKeySql(string fkName, string tableName) {
-            throw new NotSupportedByDialect("ForeignKeys not supported", "GetDropForeignKeySql", GetDialectName());
+            throw new NotSupportedByDialectException("ForeignKeys not supported", "GetDropForeignKeySql", GetDialectName());
         }
 
     	public override string GetUniqueKeySql(string ukName, string table, params string[] columnNames) {
@@ -93,12 +94,12 @@ namespace SharpData.Databases.SqLite {
         }
 
         public override string[] GetDropColumnSql(string table, string columnName) {
-            throw new NotSupportedByDialect("Try recreating the table", "GetDropColumnSql", GetDialectName());
+            throw new NotSupportedByDialectException("Try recreating the table", "GetDropColumnSql", GetDialectName());
         }
 
         public override string GetInsertReturningColumnSql(string table, string[] columns, object[] values,
                                                            string returningColumnName, string returningParameterName) {
-            throw new NotSupportedByDialect("Not supported", "GetInsertReturningColumnSql", GetDialectName());
+            throw new NotSupportedByDialectException("Not supported", "GetInsertReturningColumnSql", GetDialectName());
         }
 
     	public override string WrapSelectSqlWithPagination(string sql, int skipRows, int numberOfRows) {

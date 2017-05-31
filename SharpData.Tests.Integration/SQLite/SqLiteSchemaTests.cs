@@ -1,6 +1,7 @@
 using System.Data.SQLite;
 using System.IO;
 using SharpData.Databases;
+using SharpData.Exceptions;
 using SharpData.Tests.Integration.Data;
 using Xunit;
 
@@ -24,7 +25,7 @@ namespace SharpData.Tests.Integration.SQLite {
                 base.Can_add_foreign_key_to_table();
                 Assert.True(false);
             }
-            catch (NotSupportedByDialect ex) {
+            catch (NotSupportedByDialectException ex) {
                 Assert.Equal(ex.DialectName, "SqLiteDialect");
                 Assert.Equal(ex.FunctionName, "GetForeignKeySql");
             }
@@ -36,7 +37,7 @@ namespace SharpData.Tests.Integration.SQLite {
                 base.Can_add_named_primary_key_to_table();
                 Assert.True(false);
             }
-            catch (NotSupportedByDialect ex) {
+            catch (NotSupportedByDialectException ex) {
                 Assert.Equal(ex.DialectName, "SqLiteDialect");
                 Assert.Equal(ex.FunctionName, "GetPrimaryKeySql");
             }
@@ -48,7 +49,7 @@ namespace SharpData.Tests.Integration.SQLite {
                 base.Can_add_primary_key_to_table();
                 Assert.True(false);
             }
-            catch (NotSupportedByDialect ex) {
+            catch (NotSupportedByDialectException ex) {
                 Assert.Equal(ex.DialectName, "SqLiteDialect");
                 Assert.Equal(ex.FunctionName, "GetPrimaryKeySql");
             }
@@ -60,7 +61,7 @@ namespace SharpData.Tests.Integration.SQLite {
                 base.Can_remove_column_from_table();
                 Assert.True(false);
             }
-            catch (NotSupportedByDialect ex) {
+            catch (NotSupportedByDialectException ex) {
                 Assert.Equal(ex.DialectName, "SqLiteDialect");
                 Assert.Equal(ex.FunctionName, "GetDropColumnSql");
             }
@@ -73,7 +74,7 @@ namespace SharpData.Tests.Integration.SQLite {
                 DataClient.RemoveForeignKey("foo", "bar");
                 Assert.True(false);
             }
-            catch (NotSupportedByDialect ex) {
+            catch (NotSupportedByDialectException ex) {
                 Assert.Equal(ex.DialectName, "SqLiteDialect");
                 Assert.Equal(ex.FunctionName, "GetDropForeignKeySql");
             }

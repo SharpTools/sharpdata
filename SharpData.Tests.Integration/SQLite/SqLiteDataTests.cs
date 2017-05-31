@@ -1,6 +1,7 @@
 ﻿using System.Data.SQLite;
 using System.IO;
 using SharpData.Databases;
+using SharpData.Exceptions;
 using SharpData.Tests.Integration.Data;
 using Xunit;
 
@@ -20,7 +21,7 @@ namespace SharpData.Tests.Integration.SQLite {
         
         [Fact]
         public override void Can_insert_returning_id() {
-            var ex = Assert.Throws<NotSupportedByDialect>(() => { base.Can_insert_returning_id(); });
+            var ex = Assert.Throws<NotSupportedByDialectException>(() => { base.Can_insert_returning_id(); });
             Assert.Equal(ex.DialectName, "SqLiteDialect");
             Assert.Equal(ex.FunctionName, "GetInsertReturningColumnSql");
         }
