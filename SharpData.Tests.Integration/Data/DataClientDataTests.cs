@@ -107,7 +107,7 @@ namespace SharpData.Tests.Integration.Data {
         }
 
         [Fact]
-        public void Can_select_with_pagination() {
+        public virtual void Can_select_with_pagination() {
             CreateTableFoo();
             PopulateTableFoo();
 
@@ -121,7 +121,7 @@ namespace SharpData.Tests.Integration.Data {
         }
 
         [Fact]
-        public void Can_select_with_pagination_and_where_filter() {
+        public virtual void Can_select_with_pagination_and_where_filter() {
             CreateTableFoo();
 
             for (int i = 0; i < 10; i++) {
@@ -344,7 +344,7 @@ namespace SharpData.Tests.Integration.Data {
         }
 
         [Fact]
-        public void Can_order_by_with_filter_and_pagination() {
+        public virtual void Can_order_by_with_filter_and_pagination() {
             CreateTableFoo();
             PopulateTableFoo();
             DataClient.Insert.Into(TableFoo).Columns("id", "name").Values(4, "aaa");

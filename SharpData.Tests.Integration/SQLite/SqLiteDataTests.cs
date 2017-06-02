@@ -18,12 +18,24 @@ namespace SharpData.Tests.Integration.SQLite {
         protected override DbProviderType GetDataProviderName() {
             return DbProviderType.SqLite;
         }
-        
+
         [Fact]
         public override void Can_insert_returning_id() {
             var ex = Assert.Throws<NotSupportedByDialectException>(() => { base.Can_insert_returning_id(); });
             Assert.Equal(ex.DialectName, "SqLiteDialect");
             Assert.Equal(ex.FunctionName, "GetInsertReturningColumnSql");
+        }
+
+        [Fact(Skip = "Not implemented. Pull requests welcome :)")]
+        public override void Can_order_by_with_filter_and_pagination() {
+        }
+
+        [Fact(Skip = "Not implemented. Pull requests welcome :)")]
+        public override void Can_select_with_pagination() {
+        }
+
+        [Fact(Skip = "Not implemented. Pull requests welcome :)")]
+        public override void Can_select_with_pagination_and_where_filter() {
         }
     }
 }

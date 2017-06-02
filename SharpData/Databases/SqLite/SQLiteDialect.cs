@@ -67,7 +67,10 @@ namespace SharpData.Databases.SqLite {
             var sql = String.Format("drop table {0}", tableName);
             return new[] {sql};
         }
-        
+
+        public override string GetPrimaryKeySql(string table, string pkName, params string[] columnNames) {
+            throw new NotSupportedByDialectException("You can't modify SQLite tables in any significant way after they have been created", "GetPrimaryKeySql", GetDialectName());
+        }
 
         public override string GetForeignKeySql(string fkName, string table, string column, string referencingTable,
                                                 string referencingColumn, OnDelete onDelete) {
@@ -90,7 +93,7 @@ namespace SharpData.Databases.SqLite {
         }
 
         public override string GetAddColumnSql(string table, Column column) {
-            return String.Format("alter table {0} add {1}", table, GetColumnToSqlWhenCreating(column));
+            return String.Format("alter table {0} add column {1}", table, GetColumnToSqlWhenCreating(column));
         }
 
         public override string[] GetDropColumnSql(string table, string columnName) {
