@@ -24,7 +24,7 @@ namespace SharpData.Databases {
                 case DbProviderType.SqlServer:
                     return "System.Data.SqlClient";
                 case DbProviderType.SqLite:
-                    return "System.Data.SQLite";
+                    return "Microsoft.Data.Sqlite";
                 case DbProviderType.OleDb:
                     return "System.Data.OleDb";
                 case DbProviderType.PostgreSql:
