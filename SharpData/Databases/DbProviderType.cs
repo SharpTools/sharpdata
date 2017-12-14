@@ -24,7 +24,7 @@ namespace SharpData.Databases {
                 case DbProviderType.SqlServer:
                     return "System.Data.SqlClient";
                 case DbProviderType.SqLite:
-                    return "System.Data.SQLite";
+                    return "Microsoft.Data.Sqlite";
                 case DbProviderType.OleDb:
                     return "System.Data.OleDb";
                 case DbProviderType.PostgreSql:
@@ -34,14 +34,22 @@ namespace SharpData.Databases {
             }
         }
 
-        public static DbProviderType GetDbProviderByNamespace(string name) {
-            if (name == DbProviderType.OracleManaged.GetProviderName()) return DbProviderType.OracleManaged;
-            if (name == DbProviderType.OracleOdp.GetProviderName()) return DbProviderType.OracleOdp;
-            if (name == DbProviderType.MySql.GetProviderName()) return DbProviderType.MySql;
-            if (name == DbProviderType.SqlServer.GetProviderName()) return DbProviderType.SqlServer;
-            if (name == DbProviderType.SqLite.GetProviderName()) return DbProviderType.SqLite;
-            if (name == DbProviderType.OleDb.GetProviderName()) return DbProviderType.OleDb;
-            if (name == DbProviderType.PostgreSql.GetProviderName()) return DbProviderType.PostgreSql;
+        public static DbProviderType GetDbProviderByNamespace(string name)
+        {
+            if (string.Equals(name, DbProviderType.OracleManaged.GetProviderName(), StringComparison.OrdinalIgnoreCase))
+                return DbProviderType.OracleManaged;
+            if (string.Equals(name, DbProviderType.OracleOdp.GetProviderName(), StringComparison.OrdinalIgnoreCase))
+                return DbProviderType.OracleOdp;
+            if (string.Equals(name, DbProviderType.MySql.GetProviderName(), StringComparison.OrdinalIgnoreCase))
+                return DbProviderType.MySql;
+            if (string.Equals(name, DbProviderType.SqlServer.GetProviderName(), StringComparison.OrdinalIgnoreCase))
+                return DbProviderType.SqlServer;
+            if (string.Equals(name, DbProviderType.SqLite.GetProviderName(), StringComparison.OrdinalIgnoreCase))
+                return DbProviderType.SqLite;
+            if (string.Equals(name, DbProviderType.OleDb.GetProviderName(), StringComparison.OrdinalIgnoreCase))
+                return DbProviderType.OleDb;
+            if (string.Equals(name, DbProviderType.PostgreSql.GetProviderName(), StringComparison.OrdinalIgnoreCase))
+                return DbProviderType.PostgreSql;
             throw new ArgumentOutOfRangeException(nameof(name), name, null);
         }
 

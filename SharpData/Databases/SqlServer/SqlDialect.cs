@@ -57,8 +57,7 @@ namespace SharpData.Databases.SqlServer {
                 : "";
 
             //name type default nullable autoIncrement
-            return String.Format("{0} {1} {2} {3} {4}", col.ColumnName, colType, colNullable, colDefault,
-                colAutoIncrement);
+            return $"{col.ColumnName} {colType} {colNullable} {colDefault} {colAutoIncrement}";
         }
 
         public override string[] GetDropTableSqls(string tableName) {
@@ -179,18 +178,18 @@ namespace SharpData.Databases.SqlServer {
                     if (precision <= 0) return "NUMERIC(19,5)";
                     return String.Format("NUMERIC(19,{0})", precision);
                 case DbType.Double: return "FLOAT";
-                case DbType.Guid: return "VARCHAR(40)";
+                case DbType.Guid: return "UNIQUEIDENTIFIER";
                 case DbType.Int16: return "SMALLINT";
                 case DbType.Int32: return "INTEGER";
                 case DbType.Int64: return "BIGINT";
                 case DbType.Single: return "FLOAT";
                 case DbType.StringFixedLength:
-                    if (precision <= 0) return "CHAR(255)";
-                    if (precision.Between(1, 8000)) return String.Format("CHAR({0})", precision);
+                    if (precision <= 0) return "NCHAR(255)";
+                    if (precision.Between(1, 8000)) return String.Format("NCHAR({0})", precision);
                     return "TEXT";
                 case DbType.String:
-                    if (precision <= 0) return "VARCHAR(255)";
-                    if (precision.Between(1, 8000)) return String.Format("VARCHAR({0})", precision);
+                    if (precision <= 0) return "NVARCHAR(255)";
+                    if (precision.Between(1, 8000)) return String.Format("NVARCHAR({0})", precision);
                     return "TEXT";
                 case DbType.Time: return "TIME";
             }
