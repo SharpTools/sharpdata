@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Data.SQLite;
 using MySql.Data.MySqlClient;
@@ -12,18 +14,25 @@ namespace SharpData.Tests.Integration {
         private static Dictionary<DbProviderType, SharpFactory> _factories = new Dictionary<DbProviderType, SharpFactory>();
 
         static DBBuilder() {
-            _factories.Add(DbProviderType.SqlServer,
-                new SharpFactory(SqlClientFactory.Instance, ConnectionStrings.SqlServer));
-            _factories.Add(DbProviderType.MySql,
-                new SharpFactory(new MySqlClientFactory(), ConnectionStrings.Mysql));
-            _factories.Add(DbProviderType.OracleManaged,
-                new SharpFactory(new OracleClientFactory(), ConnectionStrings.Oracle));
-            _factories.Add(DbProviderType.OracleOdp,
-                new SharpFactory(new OracleDataAccess.OracleClientFactory(), ConnectionStrings.Oracle));
-            _factories.Add(DbProviderType.PostgreSql,
-                new SharpFactory(NpgsqlFactory.Instance, ConnectionStrings.Postgre));
-            _factories.Add(DbProviderType.SqLite,
-                new SharpFactory(SQLiteFactory.Instance, ConnectionStrings.Sqlite));
+            AddFactoryOrNull(DbProviderType.SqlServer, ConnectionStrings.SqlServer, () => SqlClientFactory.Instance);
+            AddFactoryOrNull(DbProviderType.MySql, ConnectionStrings.Mysql, () => new MySqlClientFactory());
+            AddFactoryOrNull(DbProviderType.OracleManaged, ConnectionStrings.Oracle, () => new OracleClientFactory());
+            AddFactoryOrNull(DbProviderType.OracleOdp, ConnectionStrings.Oracle, () => new OracleDataAccess.OracleClientFactory());
+            AddFactoryOrNull(DbProviderType.PostgreSql, ConnectionStrings.Postgre, () => NpgsqlFactory.Instance);
+            AddFactoryOrNull(DbProviderType.SqLite, ConnectionStrings.Sqlite, () => SQLiteFactory.Instance);
+        }
+
+        public static void AddFactoryOrNull(DbProviderType dbProviderType, 
+                                            string connectionString, 
+                                            Func<DbProviderFactory> createAction) {
+            DbProviderFactory factory = null;
+            try {
+                factory = createAction.Invoke();
+            }
+            catch {
+                //sorry, continue the other tests
+            }
+            _factories.Add(dbProviderType, new SharpFactory(factory, ConnectionStrings.SqlServer));
         }
 
         public static IDataClient GetDataClient(DbProviderType databaseProvider) {

@@ -13,7 +13,7 @@ namespace Sharp.Tests.Databases.SqlServer {
 		}
 		protected override string[] GetResultFor_Can_create_table_sql() {
 			return new string[2] {
-				"create table mytable (id integer not null identity(1,1), name varchar(255) not null)",
+				"create table mytable (id integer not null identity(1,1), name nvarchar(255) not null)",
 				"alter table mytable add constraint pk_mytable primary key (id)"
 			};
 		}
@@ -23,11 +23,11 @@ namespace Sharp.Tests.Databases.SqlServer {
 		}
 
 		protected override string GetResultFor_Can_convert_column_to_sql__with_not_null() {
-			return "col varchar(255) not null";
+			return "col nvarchar(255) not null";
 		}
 
 		protected override string GetResultFor_Can_convert_column_to_sql__with_primary_key() {
-			return "col varchar(255) not null";
+			return "col nvarchar(255) not null";
 		}
 
 		protected override string GetResultFor_Can_convert_column_to_sql__autoIncrement() {
@@ -39,7 +39,7 @@ namespace Sharp.Tests.Databases.SqlServer {
 		}
 
 		protected override string GetResultFor_Can_convert_column_to_sql__default_value() {
-			return "col varchar(255) null default ('some string')";
+			return "col nvarchar(255) null default ('some string')";
 		}
 
 		protected override string[] GetResultFor_Can_convert_column_to_values() {
