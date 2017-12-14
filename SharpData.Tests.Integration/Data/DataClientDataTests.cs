@@ -102,7 +102,7 @@ namespace SharpData.Tests.Integration.Data {
                 Filter.Eq("id", 1)
                 ).AllRows();
 
-            Assert.Equal(1, res.Count);
+            Assert.Single(res);
             Assert.True(1 == Convert.ToInt32(res[0][0]));
         }
 
@@ -157,6 +157,27 @@ namespace SharpData.Tests.Integration.Data {
             Assert.Equal(2, res.Count);
             Assert.True(1 == Convert.ToInt32(res[0][0]));
             Assert.True(2 == Convert.ToInt32(res[1][0]));
+        }
+
+        [Fact]
+        public virtual void Can_select_with_filter_with_ordering() {
+            CreateTableFoo();
+            PopulateTableFoo();
+            DataClient.Insert.Into(TableFoo)
+                             .Columns("id", "name")
+                             .Values(4, "aaaa");
+
+            ResultSet res = DataClient.Select
+                .AllColumns()
+                .From(TableFoo)
+                .Where(Filter.Gt("id", 1))
+                .OrderBy(OrderBy.Ascending("name"))
+                .AllRows();
+
+            Assert.Equal(3, res.Count);
+            Assert.True(4 == Convert.ToInt32(res[0][0]));
+            Assert.True(2 == Convert.ToInt32(res[1][0]));
+            Assert.True(3 == Convert.ToInt32(res[2][0]));
         }
 
         private static Filter CreateComplexFilter() {
