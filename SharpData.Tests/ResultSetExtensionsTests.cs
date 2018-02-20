@@ -77,6 +77,14 @@ namespace Sharp.Tests.Data {
             Assert.Null(list.Last().String);
         }
 
+        [Fact]
+        public void Should_int_to_enum() {
+            var res = CreateResultSet();
+            res.AddRow(1, null, DateTime.Today, 1.1);
+            var list = res.Map<WithEnum>();
+            Assert.Equal(SuperEnum.Bar, list[0].Int);
+        }
+
         private static ResultSet CreateResultSet() {
             var res = new ResultSet("Int", "String", "DateTime", "Double");
             res.AddRow(1, "String", DateTime.Today, 1.1);
@@ -113,6 +121,16 @@ namespace Sharp.Tests.Data {
 
         private class WrongType {
             public string Int { get; private set; }
+        }
+
+        private class WithEnum {
+            public SuperEnum Int { get; set; }
+        }
+
+        private enum SuperEnum {
+            Foo = 0,
+            Bar = 1,
+            FooBar = 2
         }
     }
 }
