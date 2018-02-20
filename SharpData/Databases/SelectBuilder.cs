@@ -39,12 +39,9 @@ namespace SharpData.Databases {
 			if (Filter != null) {
 				HasFilter = true;
 
-				string whereSql = _dialect.GetWhereSql(Filter, 0);
-
-				object[] pars = Filter.GetAllValueParameters();
-
+				var whereSql = _dialect.GetWhereSql(Filter, 0);
+				var pars = Filter.GetAllValueParameters();
 				Parameters = _dialect.ConvertToNamedParameters(0, pars);
-
 				_select += " " + whereSql;
 			}
 		}

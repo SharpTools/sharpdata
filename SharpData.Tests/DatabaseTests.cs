@@ -74,8 +74,8 @@ namespace Sharp.Tests.Data {
 
         [Fact]
         public void Constructor_should_set_provider_and_connectionstring() {
-            IDataProvider dataProvider = new Mock<IDataProvider>().Object;
-            Database db = new Database(dataProvider, "foo");
+            var dataProvider = new Mock<IDataProvider>().Object;
+            var db = new Database(dataProvider, "foo");
 
             Assert.Equal("foo", db.ConnectionString);
             Assert.Equal(dataProvider, db.Provider);
@@ -99,6 +99,5 @@ namespace Sharp.Tests.Data {
             _provider.Setup(x => x.CreateSpecificException(ex, _sql)).Returns(new DatabaseException("moo", ex, _sql));
             Assert.Throws<DatabaseException>(() => _db.ExecuteSql(_sql));
         }
-
     }
 }

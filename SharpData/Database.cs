@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace SharpData {
     public class Database : DefaultDatabase, IDatabase {
@@ -6,7 +8,7 @@ namespace SharpData {
             : base(provider, connectionString) {
             Timeout = -1;
         }
-
+        
         public int ExecuteSql(string call, params object[] parameters) {
             return ExecuteCatchingErrors(() => TryExecuteSql(call, parameters), call);
         }
