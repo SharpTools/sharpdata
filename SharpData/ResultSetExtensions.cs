@@ -10,9 +10,8 @@ namespace SharpData {
             var list = new List<T>();
             Type type = typeof(T);
             var columns = res.GetColumnNames();
-            var columnProps =
-                columns.Select(x => type.GetProperty(x, ReflectionHelper.NoRestrictions | BindingFlags.IgnoreCase))
-                    .ToList();
+            var columnProps = columns.Select(x => type.GetProperty(x, ReflectionHelper.NoRestrictions | BindingFlags.IgnoreCase))
+                                     .ToList();
             foreach (var row in res) {
                 var obj = new T();
                 for (int i = 0; i < columnProps.Count; i++) {
@@ -21,10 +20,17 @@ namespace SharpData {
                         continue;
                     }
                     object value = row[i];
-                    var targetType = IsNullableType(propertyInfo.PropertyType) ? Nullable.GetUnderlyingType(propertyInfo.PropertyType) : propertyInfo.PropertyType;
+                    var targetType = IsNullableType(propertyInfo.PropertyType) ? 
+                                        Nullable.GetUnderlyingType(propertyInfo.PropertyType) : 
+                                        propertyInfo.PropertyType;
 
-                    if (value != null && value.GetType() != targetType) {
-                        value = Convert.ChangeType(value, targetType);
+                    if(value != null) {
+                        if (targetType.GetTypeInfo().IsEnum) {
+                            value = Enum.ToObject(targetType, value);
+                        }
+                        else if (value.GetType() != targetType) {
+                            value = Convert.ChangeType(value, targetType);
+                        }
                     }
                     propertyInfo.SetValue(obj, value, null);
                 }
