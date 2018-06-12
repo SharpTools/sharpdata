@@ -74,6 +74,7 @@ namespace SharpData.Databases.MySql {
 
     	protected override string GetDbTypeString(DbType type, int precision) {
             switch (type) {
+                case DbType.AnsiString:
                 case DbType.String:
                     if (precision == 0) {
                         return "VARCHAR(255)";

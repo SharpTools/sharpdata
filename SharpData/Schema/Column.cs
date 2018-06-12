@@ -44,6 +44,7 @@ namespace SharpData.Schema {
             fc.Object.IsAutoIncrement = true;
             return fc; 
         }
+        public static FluentColumn AnsiString(string name, int size = 0) { return new FluentColumn(name, DbType.AnsiString, size); }
         public static FluentColumn String(string name, int size = 0) { return new FluentColumn(name, DbType.String, size); }
         public static FluentColumn Clob(string name, int size = System.Int32.MaxValue) { return new FluentColumn(name, DbType.String, size); }
         public static FluentColumn Binary(string name, int size = System.Int32.MaxValue) { return new FluentColumn(name, DbType.Binary, size); }
