@@ -213,6 +213,7 @@ namespace SharpData {
 
         protected int TryExecuteSql(string call, object[] parameters, bool isBulk = false) {
             var cmd = CreateCommand(call, parameters, isBulk);
+
             var modifiedRows = cmd.ExecuteNonQuery();
             RetrieveOutParameters(parameters, cmd);
             return modifiedRows;

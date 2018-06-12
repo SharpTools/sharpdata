@@ -26,6 +26,23 @@ namespace SharpData.Sample {
                   .Values("foo2", "bar")
                   .Values("foo3", "bar");
 
+            var userInsert = new UserInsert {
+                Username = "ironman",
+                Password = "superpass"
+            };
+
+            client.Insert
+                  .Into("users")
+                  .Object(userInsert);
+
+            userInsert.Username = "hulk";
+
+            var id = client.Insert
+                           .Into("users")
+                           .ObjectAnd(userInsert)
+                           .Return<int>("Id");
+
+
             var username = "foo4";
             var password = "bar4";
             client.ExecSqlFormattable($"insert into users (username, password) values ({username}, {password})");
