@@ -42,6 +42,9 @@ namespace SharpData.Sample {
                            .ObjectAnd(userInsert)
                            .Return<int>("Id");
 
+            var loadedUser = client.LoadById<User>("users", id, u => u.Id);
+            Console.WriteLine("LoadById User: " + loadedUser.Username);
+
 
             var username = "foo4";
             var password = "bar4";

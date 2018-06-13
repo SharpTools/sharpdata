@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 
 namespace SharpData.Util {
@@ -19,5 +20,15 @@ namespace SharpData.Util {
                .GetProperties(NoRestrictions | BindingFlags.IgnoreCase)
                .Select(p => p.GetValue(obj))
                .ToArray();
+
+        public static LambdaExpression StripConvert<T>(Expression<Func<T, object>> source) {
+            var result = source.Body;
+            while (((result.NodeType == ExpressionType.Convert)
+                   || (result.NodeType == ExpressionType.ConvertChecked))
+                   && (result.Type == typeof(object))) {
+                result = ((UnaryExpression)result).Operand;
+            }
+            return Expression.Lambda(result, source.Parameters);
+        }
     }
 }
