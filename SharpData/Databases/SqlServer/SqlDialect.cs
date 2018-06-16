@@ -158,16 +158,12 @@ namespace SharpData.Databases.SqlServer {
             switch (type) {
                 case DbType.AnsiStringFixedLength:
                     if (precision <= 0) return "CHAR(255)";
-                    if (precision.Between(1, 255)) return String.Format("CHAR({0})", precision);
-                    if (precision.Between(256, 65535)) return "TEXT";
-                    if (precision.Between(65536, 16777215)) return "MEDIUMTEXT";
+                    if (precision.Between(1, 8000)) return String.Format("CHAR({0})", precision);
                     break;
                 case DbType.AnsiString:
                     if (precision <= 0) return "VARCHAR(255)";
-                    if (precision.Between(1, 255)) return String.Format("VARCHAR({0})", precision);
-                    if (precision.Between(256, 65535)) return "TEXT";
-                    if (precision.Between(65536, 16777215)) return "MEDIUMTEXT";
-                    break;
+                    if (precision.Between(1, 8000)) return String.Format("VARCHAR({0})", precision);
+                    return "VARCHAR(MAX)";
                 case DbType.Binary: return "BINARY";
                 case DbType.Boolean: return "BIT";
                 case DbType.Byte: return "TINYINT UNSIGNED";
@@ -193,7 +189,7 @@ namespace SharpData.Databases.SqlServer {
                     return "TEXT";
                 case DbType.Time: return "TIME";
             }
-            throw new DataTypeNotAvailableException(String.Format("The type {0} is no available for sqlserver", type));
+            throw new DataTypeNotAvailableException(String.Format("The type {0} with precision {1} is no available for sqlserver", type, precision));
         }
 
         public override string GetColumnValueToSql(object value) {
