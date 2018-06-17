@@ -172,7 +172,7 @@ namespace SharpData.Databases.SqlServer {
                 case DbType.Boolean: return "BIT";
                 case DbType.Byte: return "TINYINT UNSIGNED";
                 case DbType.Currency: return "MONEY";
-                case DbType.Date: return "DATETIME";
+                case DbType.Date: return "DATE";
                 case DbType.DateTime: return "DATETIME";
                 case DbType.Decimal:
                     if (precision <= 0) return "NUMERIC(19,5)";
