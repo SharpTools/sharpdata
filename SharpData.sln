@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpData", "SharpData\SharpData.csproj", "{114DCB49-5B78-4D87-A02D-918561D7799C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpData", "SharpData\SharpData.csproj", "{114DCB49-5B78-4D87-A02D-918561D7799C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpData.Sample.Net46", "SharpData.Sample.Net46\SharpData.Sample.Net46.csproj", "{0802E465-BA2F-4F06-88DF-B8A833752EF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpData.Sample.Core", "SharpData.Sample.Core\SharpData.Sample.Core.csproj", "{9D328685-EF5D-495C-91FB-6DA4C41E6148}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpData.Sample.Core", "SharpData.Sample.Core\SharpData.Sample.Core.csproj", "{9D328685-EF5D-495C-91FB-6DA4C41E6148}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpData.Tests", "SharpData.Tests\SharpData.Tests.csproj", "{F20DCDED-B12F-4F7A-A775-89DFC91DCCBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharpData.Tests", "SharpData.Tests\SharpData.Tests.csproj", "{F20DCDED-B12F-4F7A-A775-89DFC91DCCBD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpData.Tests.Integration", "SharpData.Tests.Integration\SharpData.Tests.Integration.csproj", "{91821AFF-E056-4556-930F-130B108C6E7C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpData.Sample.NetFull", "SharpData.Sample.NetFull\SharpData.Sample.NetFull.csproj", "{0802E465-BA2F-4F06-88DF-B8A833752EF8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,6 @@ Global
 		{114DCB49-5B78-4D87-A02D-918561D7799C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{114DCB49-5B78-4D87-A02D-918561D7799C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{114DCB49-5B78-4D87-A02D-918561D7799C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0802E465-BA2F-4F06-88DF-B8A833752EF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0802E465-BA2F-4F06-88DF-B8A833752EF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0802E465-BA2F-4F06-88DF-B8A833752EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0802E465-BA2F-4F06-88DF-B8A833752EF8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9D328685-EF5D-495C-91FB-6DA4C41E6148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9D328685-EF5D-495C-91FB-6DA4C41E6148}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D328685-EF5D-495C-91FB-6DA4C41E6148}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,8 +35,15 @@ Global
 		{91821AFF-E056-4556-930F-130B108C6E7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91821AFF-E056-4556-930F-130B108C6E7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91821AFF-E056-4556-930F-130B108C6E7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0802E465-BA2F-4F06-88DF-B8A833752EF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0802E465-BA2F-4F06-88DF-B8A833752EF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0802E465-BA2F-4F06-88DF-B8A833752EF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0802E465-BA2F-4F06-88DF-B8A833752EF8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4F810F41-7C16-4149-ABB5-09224398F2CE}
 	EndGlobalSection
 EndGlobal
