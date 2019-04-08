@@ -2,7 +2,7 @@
 using Oracle.ManagedDataAccess.Client;
 using SharpData;
 
-namespace SharpData.Sample.Net46 {
+namespace SharpData.Sample.NetFull {
     class Program {
         static void Main(string[] args) {
             SharpFactory.Default = new SharpFactory(new OracleClientFactory(), "Data Source=//localhost/XE;User Id=sharp;Password=sharp;");

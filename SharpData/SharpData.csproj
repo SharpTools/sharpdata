@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net46</TargetFrameworks>
     <Version>2.1.1</Version>
     <Authors>Andre Carlucci</Authors>
     <Company>Andre Carlucci</Company>
@@ -19,8 +19,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.2" />
+  </ItemGroup>
+      
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' " Label=".NET Standard 2.0 Package References">
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="1.1.2" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.4.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' " Label=".NET 4.6 Package References">
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
   </ItemGroup>
 
