@@ -157,43 +157,43 @@ namespace SharpData.Databases.SqlServer {
         protected override string GetDbTypeString(DbType type, int precision) {
             switch (type) {
                 case DbType.AnsiStringFixedLength:
-                    if (precision <= 0) return "CHAR(255)";
-                    if (precision.Between(1, 255)) return String.Format("CHAR({0})", precision);
-                    if (precision.Between(256, 65535)) return "TEXT";
-                    if (precision.Between(65536, 16777215)) return "MEDIUMTEXT";
-                    break;
+	                if (precision <= 0) return "CHAR(255)";
+	                if (precision.Between(1, 8000)) return $"CHAR({precision})";
+	                return "CHAR(8000)";
                 case DbType.AnsiString:
-                    if (precision <= 0) return "VARCHAR(255)";
-                    if (precision.Between(1, 255)) return String.Format("VARCHAR({0})", precision);
-                    if (precision.Between(256, 65535)) return "TEXT";
-                    if (precision.Between(65536, 16777215)) return "MEDIUMTEXT";
-                    break;
+		            if (precision <= 0) return "VARCHAR(255)";
+		            if (precision.Between(1, 8000)) return $"VARCHAR({precision})";
+		            return "VARCHAR(MAX)";
                 case DbType.Binary: return "BINARY";
                 case DbType.Boolean: return "BIT";
                 case DbType.Byte: return "TINYINT UNSIGNED";
                 case DbType.Currency: return "MONEY";
-                case DbType.Date: return "DATETIME";
-                case DbType.DateTime: return "DATETIME";
+	            case DbType.Date: return "DATETIME";
+	            case DbType.DateTime: return "DATETIME";
+	            case DbType.DateTime2: return "DATETIME2";
+	            case DbType.DateTimeOffset: return "DATETIMEOFFSET";
                 case DbType.Decimal:
-                    if (precision <= 0) return "NUMERIC(19,5)";
-                    return String.Format("NUMERIC(19,{0})", precision);
+                    if (precision <= 0) return "NUMERIC(29,4)";
+                    return String.Format("NUMERIC(29,{0})", precision);
                 case DbType.Double: return "FLOAT";
                 case DbType.Guid: return "UNIQUEIDENTIFIER";
                 case DbType.Int16: return "SMALLINT";
                 case DbType.Int32: return "INTEGER";
                 case DbType.Int64: return "BIGINT";
-                case DbType.Single: return "FLOAT";
+                case DbType.Single: return "REAL";
                 case DbType.StringFixedLength:
-                    if (precision <= 0) return "NCHAR(255)";
-                    if (precision.Between(1, 8000)) return String.Format("NCHAR({0})", precision);
-                    return "TEXT";
+		            if (precision <= 0) return "NCHAR(255)";
+		            if (precision.Between(1, 4000)) return $"NCHAR({precision})";
+		            return "NCHAR(4000)";
                 case DbType.String:
-                    if (precision <= 0) return "NVARCHAR(255)";
-                    if (precision.Between(1, 8000)) return String.Format("NVARCHAR({0})", precision);
-                    return "TEXT";
+		            if (precision <= 0) return "NVARCHAR(255)";
+		            if (precision.Between(1, 4000)) return $"NVARCHAR({precision})";
+		            return "NVARCHAR(MAX)";
                 case DbType.Time: return "TIME";
+	            case DbType.SByte: return "SMALLINT";
+	            default:
+		            throw new DataTypeNotAvailableException($"The type {type} is no available for sqlserver");
             }
-            throw new DataTypeNotAvailableException(String.Format("The type {0} is no available for sqlserver", type));
         }
 
         public override string GetColumnValueToSql(object value) {
