@@ -158,22 +158,24 @@ namespace SharpData.Databases.SqlServer {
             switch (type) {
                 case DbType.AnsiStringFixedLength:
                     if (precision <= 0) return "CHAR(255)";
-                    if (precision.Between(1, 255)) return String.Format("CHAR({0})", precision);
-                    if (precision.Between(256, 65535)) return "TEXT";
-                    if (precision.Between(65536, 16777215)) return "MEDIUMTEXT";
+                    if (precision.Between(1, 8000)) return String.Format("CHAR({0})", precision);
                     break;
                 case DbType.AnsiString:
                     if (precision <= 0) return "VARCHAR(255)";
-                    if (precision.Between(1, 255)) return String.Format("VARCHAR({0})", precision);
-                    if (precision.Between(256, 65535)) return "TEXT";
-                    if (precision.Between(65536, 16777215)) return "MEDIUMTEXT";
-                    break;
-                case DbType.Binary: return "BINARY";
+                    if (precision.Between(1, 8000)) return String.Format("VARCHAR({0})", precision);
+                    return "VARCHAR(MAX)";
+                case DbType.Binary:
+                    if (precision <= 0) return "BINARY";
+                    if (precision.Between(1, 8000)) return String.Format("VARBINARY({0})", precision);
+                    return "VARBINARY(MAX)";
                 case DbType.Boolean: return "BIT";
-                case DbType.Byte: return "TINYINT UNSIGNED";
+                case DbType.Byte: return "TINYINT";
                 case DbType.Currency: return "MONEY";
-                case DbType.Date: return "DATETIME";
+                case DbType.Date: return "DATE";
                 case DbType.DateTime: return "DATETIME";
+                case DbType.DateTime2:
+                    if (precision <= 0) return "DATETIME2";
+                    return String.Format("DATETIME2({0})", precision);
                 case DbType.Decimal:
                     if (precision <= 0) return "NUMERIC(19,5)";
                     return String.Format("NUMERIC(19,{0})", precision);
@@ -185,15 +187,15 @@ namespace SharpData.Databases.SqlServer {
                 case DbType.Single: return "FLOAT";
                 case DbType.StringFixedLength:
                     if (precision <= 0) return "NCHAR(255)";
-                    if (precision.Between(1, 8000)) return String.Format("NCHAR({0})", precision);
-                    return "TEXT";
+                    if (precision.Between(1, 4000)) return String.Format("NCHAR({0})", precision);
+                    break;
                 case DbType.String:
                     if (precision <= 0) return "NVARCHAR(255)";
-                    if (precision.Between(1, 8000)) return String.Format("NVARCHAR({0})", precision);
-                    return "TEXT";
+                    if (precision.Between(1, 4000)) return String.Format("NVARCHAR({0})", precision);
+                    return "NVARCHAR(MAX)";
                 case DbType.Time: return "TIME";
             }
-            throw new DataTypeNotAvailableException(String.Format("The type {0} is no available for sqlserver", type));
+            throw new DataTypeNotAvailableException(String.Format("The type {0} with precision {1} is no available for sqlserver", type, precision));
         }
 
         public override string GetColumnValueToSql(object value) {
@@ -219,32 +221,32 @@ namespace SharpData.Databases.SqlServer {
 
         public override string GetAddCommentToColumnSql(string tableName, string columnName, string comment) {
             return String.Format(@"
-                declare @CurrentUser sysname; 
-                select @CurrentUser = user_name(); 
+                declare @CurrentUser sysname;
+                select @CurrentUser = user_name();
                 execute sp_addextendedproperty '{0}', '{1}', 'user', @CurrentUser, 'table', '{2}', 'column', '{3}'",
                 ExtendedPropertyNameForComments, comment, tableName, columnName);
         }
 
         public override string GetAddCommentToTableSql(string tableName, string comment) {
             return String.Format(@"
-                declare @CurrentUser sysname; 
-                select @CurrentUser = user_name(); 
+                declare @CurrentUser sysname;
+                select @CurrentUser = user_name();
                 execute sp_addextendedproperty '{0}', '{1}', 'user', @CurrentUser, 'table', '{2}'",
                 ExtendedPropertyNameForComments, comment, tableName);
         }
 
         public override string GetRemoveCommentFromColumnSql(string tableName, string columnName) {
             return String.Format(@"
-                declare @CurrentUser sysname; 
-                select @CurrentUser = user_name(); 
+                declare @CurrentUser sysname;
+                select @CurrentUser = user_name();
                 execute sp_dropextendedproperty '{0}', 'user', @CurrentUser, 'table', '{1}', 'column', '{2}' ",
                 ExtendedPropertyNameForComments, tableName, columnName);
         }
 
         public override string GetRemoveCommentFromTableSql(string tableName) {
             return String.Format(@"
-                declare @CurrentUser sysname; 
-                select @CurrentUser = user_name(); 
+                declare @CurrentUser sysname;
+                select @CurrentUser = user_name();
                 execute sp_dropextendedproperty '{0}', 'user', @CurrentUser, 'table', '{1}'",
                 ExtendedPropertyNameForComments, tableName);
         }
